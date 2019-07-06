@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{2F512CE3-7D0F-A4E0-4266-E0289BCF394F}</ProjectGuid>
+    <ProjectGuid>{2646ABE4-4B53-91EB-D09A-ABE728539DE5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -60,43 +60,55 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Camera.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Creeper.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Entity.cs" />
     <Compile Include="Assets\Scripts\Health.cs" />
+    <Compile Include="Assets\Scripts\MonoSingleton.cs" />
+    <Compile Include="Assets\Scripts\Object Pool\IPoolSpawner.cs" />
+    <Compile Include="Assets\Scripts\Object Pool\ObjectPool.cs" />
+    <Compile Include="Assets\Scripts\Object Pool\Pool.cs" />
+    <Compile Include="Assets\Scripts\Object Pool\PoolRegistar.cs" />
+    <Compile Include="Assets\Scripts\Object Pool\RegistarItem.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Stamina.cs" />
+    <Compile Include="Assets\Scripts\Stat.cs" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Unnamed-Prototype/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Unnamed-Prototype/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Unnamed-Prototype/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Unnamed-Prototype/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Unnamed-Prototype/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Unnamed-Prototype/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Unnamed-Prototype/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Unnamed-Prototype/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Unnamed-Prototype/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Unnamed-Prototype/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Unnamed-Prototype/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Unnamed-Prototype/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Resilio/Sync/Projects/Name-pending/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.0a8/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
