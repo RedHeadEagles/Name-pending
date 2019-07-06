@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 270986162}
   - component: {fileID: 270986166}
   - component: {fileID: 270986165}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,10 +152,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b2948e62f85aae4aa1951ab800bd729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
   health:
-    baseValue: 100
+    max: 100
+    current: 100
+    regen: 1
   stamina:
-    baseValue: 100
+    max: 100
+    current: 100
   speed: 10
 --- !u!50 &270986163
 Rigidbody2D:
@@ -415,7 +419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 792218630}
   - component: {fileID: 792218631}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -499,7 +503,7 @@ GameObject:
   - component: {fileID: 1341295169}
   - component: {fileID: 1341295168}
   - component: {fileID: 1341295170}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Creeper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -582,8 +586,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d55932ef517b8604e84ec16530a76c4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
   health:
-    baseValue: 100
+    max: 100
+    current: 100
+    regen: 1
   speedChase: 5
   speedWander: 1
   aggroRange: 15

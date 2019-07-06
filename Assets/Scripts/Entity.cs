@@ -5,6 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Entity : MonoBehaviour
 {
+	[SerializeField]
+	protected int maxHealth = 100;
+
+	public int MaxHealth { get { return maxHealth; } }
+
+	private int healthCurrent = 100;
 	public Health health = new Health(100);
 
 	private Rigidbody2D body = null;
@@ -30,6 +36,8 @@ public abstract class Entity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		health.DoRegen(Time.deltaTime);
+
 		if (health.IsDead)
 		{
 			OnDeath();

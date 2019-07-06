@@ -64,7 +64,6 @@
     <Compile Include="Assets\Scripts\Enemies\Creeper.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Entity.cs" />
-    <Compile Include="Assets\Scripts\Health.cs" />
     <Compile Include="Assets\Scripts\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Object Pool\IPoolSpawner.cs" />
     <Compile Include="Assets\Scripts\Object Pool\ObjectPool.cs" />
@@ -72,8 +71,9 @@
     <Compile Include="Assets\Scripts\Object Pool\PoolRegistar.cs" />
     <Compile Include="Assets\Scripts\Object Pool\RegistarItem.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\Scripts\Stamina.cs" />
-    <Compile Include="Assets\Scripts\Stat.cs" />
+    <Compile Include="Assets\Scripts\Stats\Health.cs" />
+    <Compile Include="Assets\Scripts\Stats\Stamina.cs" />
+    <Compile Include="Assets\Scripts\Stats\Stat.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Resilio/Sync/Projects/Name-pending/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
