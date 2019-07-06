@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class Creeper : Enemy
 {
+	public float wanderRange = 5;
+
+	private float nextWander = 0;
+
+	Vector2 wanderLocation;
+
 	protected override void OnChase(Entity target)
 	{
-		Vector2 vector = target.transform.position - transform.position;
-		vector.Normalize();
-		Body.velocity = vector * speedChase;
+		MoveToward(target, speedChase);
 	}
 
 	protected override void OnWander()
 	{
-		Body.velocity = Vector2.zero;
+		if(nextWander<=0 || DistanceTo(wanderLocation) < 0.25f)
+		{
+			nextWander += 5;
+			wanderLocation = Random.insideUnitCircle * wanderRange + home;
+		}
+
+		nextWander -= Time.deltaTime;
+		MoveToward(wanderLocation, speedWander);
+	}
+
+	protected override void OnReturnHome()
+	{
+		MoveToward(home, speedChase * 2);
 	}
 }

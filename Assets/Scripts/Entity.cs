@@ -42,8 +42,29 @@ public abstract class Entity : MonoBehaviour
 	/// </summary>
 	protected virtual void OnDeath() { }
 
+	public void MoveToward(Entity entity, float speed)
+	{
+		MoveToward(entity.transform.position, speed);
+	}
+
+	public void MoveToward(Vector3 location, float speed)
+	{
+		Vector2 vector = location - transform.position;
+		Move(vector.normalized, speed);
+	}
+
 	public void Move(Vector2 vector, float speed)
 	{
 		Body.velocity = vector * speed;
+	}
+
+	public float DistanceTo(Entity entity)
+	{
+		return Vector2.Distance(transform.position, entity.transform.position);
+	}
+
+	public float DistanceTo(Vector2 location)
+	{
+		return Vector2.Distance(transform.position, location);
 	}
 }
