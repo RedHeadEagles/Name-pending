@@ -13,8 +13,8 @@ public class Player : Entity
     {
     }
 
-    // Update is called once per frame
-    void Update()
+	// Update is called once per frame
+	protected override void OnUpdate()
     {
 		float x = Input.GetAxis("Horizontal");
 		float y = Input.GetAxis("Vertical");

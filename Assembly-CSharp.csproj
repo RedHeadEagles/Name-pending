@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Enemies\Creeper.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Entity.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Object Pool\IPoolSpawner.cs" />
     <Compile Include="Assets\Scripts\Object Pool\ObjectPool.cs" />

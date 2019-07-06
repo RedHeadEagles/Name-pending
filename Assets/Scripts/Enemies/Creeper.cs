@@ -2,33 +2,93 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Creeper : Enemy
+public class Creeper : Entity
 {
+	private enum State
+	{
+		Wander,
+		Chase,
+		Return,
+		Attack
+	};
+
 	public float wanderRange = 5;
 
 	private float nextWander = 0;
 
 	Vector2 wanderLocation;
 
-	protected override void OnChase(Entity target)
+	public float speedChase = 10;
+
+	public float speedWander = 3;
+
+	public float aggroRange = 15;
+
+	public float returnHomeRange = 30;
+
+	public float wanderTime = 5;
+
+	public float attackRange = 1;
+
+	private Entity target = null;
+
+	protected Vector2 home;
+
+	private State state = State.Wander;
+
+	// Start is called before the first frame update
+	void Start()
 	{
-		MoveToward(target, speedChase);
+		home = transform.position;
 	}
 
-	protected override void OnWander()
+	// Update is called once per frame
+	protected override void OnUpdate()
 	{
-		if(nextWander<=0 || DistanceTo(wanderLocation) < 0.25f)
+		// Return home if we have strayed to far from our spawn location
+		if (DistanceTo(home) > 30)
+			state = State.Return;
+
+		switch (state)
 		{
-			nextWander += 5;
-			wanderLocation = Random.insideUnitCircle * wanderRange + home;
+			case State.Chase:
+				if (DistanceToPlayer < attackRange)
+					state = State.Attack;
+				else if (DistanceToPlayer > aggroRange)
+					state = State.Return;
+				else
+					MoveToward(GameManager.Player, speedChase);
+				break;
+			
+			case State.Wander:
+				nextWander -= Time.deltaTime;
+
+				if(nextWander <= 0)
+				{
+					nextWander += Random.Range(0f, wanderTime);
+					wanderLocation = Random.insideUnitCircle * wanderRange + home;
+				}
+
+				MoveToward(wanderLocation, speedWander);
+
+				if (DistanceToPlayer < aggroRange)
+				{
+					state = State.Chase;
+					target = GameManager.Player;
+				}
+				break;
+
+			case State.Attack:
+				if (DistanceToPlayer > attackRange)
+					state = State.Chase;
+				Body.velocity = Vector2.zero;
+				break;
+
+			case State.Return:
+				MoveToward(home, speedChase);
+				if (DistanceTo(home) < 1)
+					state = State.Wander;
+				break;
 		}
-
-		nextWander -= Time.deltaTime;
-		MoveToward(wanderLocation, speedWander);
-	}
-
-	protected override void OnReturnHome()
-	{
-		MoveToward(home, speedChase * 2);
 	}
 }
