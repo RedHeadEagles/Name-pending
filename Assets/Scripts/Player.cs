@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Entity
 {
 	public Stamina stamina = new Stamina(100);
+
+	public Slider healthBar;
+
+	public Slider staminaBar;
 
 	private Vector2 home;
 
@@ -23,6 +28,9 @@ public class Player : Entity
 		float y = Input.GetAxis("Vertical");
 		Vector2 vector = new Vector2(x, y);
 		Move(vector, speed);
+
+		healthBar.value = health.Percentage;
+		staminaBar.value = stamina.Percentage;
 	}
 
 	protected override void OnDeath()
