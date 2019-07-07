@@ -22,6 +22,10 @@ public abstract class Entity : MonoBehaviour
 		}
 	}
 
+	public bool IsDead { get { return health.Current == 0; } }
+
+	public bool IsNotDead { get { return health.Current > 0; } }
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -32,16 +36,16 @@ public abstract class Entity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		DistanceToPlayer = DistanceTo(GameManager.Player);
-
-		health.DoRegen(Time.deltaTime);
+		DistanceToPlayer = GameManager.Player.IsDead ? float.MaxValue : DistanceTo(GameManager.Player);
 
 		if (health.IsDead)
 		{
-			OnDeath();
 			gameObject.SetActive(false);
+			OnDeath();
 			return;
 		}
+
+		health.DoRegen(Time.deltaTime);
 
 		OnUpdate();
     }

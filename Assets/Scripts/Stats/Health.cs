@@ -25,12 +25,12 @@ public class Health : Stat
 
 	public Health(int baseHealth) : base(baseHealth) { }
 
-	public void ApplyDamage(int amount)
+	public void ApplyDamage(float amount)
 	{
 		Current -= amount;
 	}
 
-	public void Heal(int amount)
+	public void Heal(float amount)
 	{
 		ApplyDamage(-amount);
 	}

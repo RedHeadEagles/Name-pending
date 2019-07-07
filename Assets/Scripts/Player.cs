@@ -6,11 +6,14 @@ public class Player : Entity
 {
 	public Stamina stamina = new Stamina(100);
 
+	private Vector2 home;
+
 	public float speed = 10;
 
     // Start is called before the first frame update
     void Start()
     {
+		home = transform.position;
     }
 
 	// Update is called once per frame
@@ -20,5 +23,12 @@ public class Player : Entity
 		float y = Input.GetAxis("Vertical");
 		Vector2 vector = new Vector2(x, y);
 		Move(vector, speed);
+	}
+
+	protected override void OnDeath()
+	{
+		transform.position = home;
+		gameObject.SetActive(true);
+		health.Reset();
 	}
 }

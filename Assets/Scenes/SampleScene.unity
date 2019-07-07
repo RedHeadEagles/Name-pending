@@ -179,6 +179,8 @@ MonoBehaviour:
   returnHomeRange: 30
   wanderTime: 5
   attackRange: 1
+  attackTime: 2
+  attackDamage: 20
 --- !u!50 &35283956
 Rigidbody2D:
   serializedVersion: 4
@@ -436,6 +438,8 @@ MonoBehaviour:
   returnHomeRange: 30
   wanderTime: 5
   attackRange: 1
+  attackTime: 2
+  attackDamage: 20
 --- !u!50 &108360288
 Rigidbody2D:
   serializedVersion: 4
@@ -693,6 +697,8 @@ MonoBehaviour:
   returnHomeRange: 30
   wanderTime: 5
   attackRange: 1
+  attackTime: 2
+  attackDamage: 20
 --- !u!50 &164209259
 Rigidbody2D:
   serializedVersion: 4
@@ -2218,6 +2224,8 @@ MonoBehaviour:
   returnHomeRange: 30
   wanderTime: 5
   attackRange: 1
+  attackTime: 2
+  attackDamage: 20
 --- !u!50 &628319878
 Rigidbody2D:
   serializedVersion: 4
@@ -3573,6 +3581,8 @@ MonoBehaviour:
   returnHomeRange: 30
   wanderTime: 5
   attackRange: 1
+  attackTime: 2
+  attackDamage: 20
 --- !u!50 &1103219552
 Rigidbody2D:
   serializedVersion: 4
@@ -3830,6 +3840,8 @@ MonoBehaviour:
   returnHomeRange: 30
   wanderTime: 5
   attackRange: 1
+  attackTime: 2
+  attackDamage: 20
 --- !u!50 &1156890113
 Rigidbody2D:
   serializedVersion: 4
@@ -4474,6 +4486,8 @@ MonoBehaviour:
   returnHomeRange: 30
   wanderTime: 5
   attackRange: 1
+  attackTime: 2
+  attackDamage: 20
 --- !u!50 &1341295169
 Rigidbody2D:
   serializedVersion: 4
@@ -4570,6 +4584,8 @@ MonoBehaviour:
   returnHomeRange: 30
   wanderTime: 5
   attackRange: 1
+  attackTime: 2
+  attackDamage: 20
 --- !u!50 &1355263144
 Rigidbody2D:
   serializedVersion: 4
@@ -6263,6 +6279,8 @@ MonoBehaviour:
   returnHomeRange: 30
   wanderTime: 5
   attackRange: 1
+  attackTime: 2
+  attackDamage: 20
 --- !u!50 &1925477353
 Rigidbody2D:
   serializedVersion: 4
@@ -6859,6 +6877,8 @@ MonoBehaviour:
   returnHomeRange: 30
   wanderTime: 5
   attackRange: 1
+  attackTime: 2
+  attackDamage: 20
 --- !u!50 &2129803981
 Rigidbody2D:
   serializedVersion: 4

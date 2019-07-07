@@ -30,6 +30,12 @@ public class Creeper : Entity
 
 	public float attackRange = 1;
 
+	public float attackTime = 2;
+
+	public float attackDamage = 10;
+
+	private float nextAttack = 0;
+
 	private Entity target = null;
 
 	protected Vector2 home;
@@ -52,6 +58,8 @@ public class Creeper : Entity
 		switch (state)
 		{
 			case State.Chase:
+				nextAttack -= Time.deltaTime;
+
 				if (DistanceToPlayer < attackRange)
 					state = State.Attack;
 				else if (DistanceToPlayer > aggroRange)
@@ -73,14 +81,24 @@ public class Creeper : Entity
 
 				if (DistanceToPlayer < aggroRange)
 				{
+					nextAttack = attackTime;
 					state = State.Chase;
 					target = GameManager.Player;
 				}
 				break;
 
 			case State.Attack:
+				nextAttack -= Time.deltaTime;
+
 				if (DistanceToPlayer > attackRange)
 					state = State.Chase;
+
+				if(nextAttack <= 0)
+				{
+					nextAttack = attackTime;
+					GameManager.Player.health.ApplyDamage(attackDamage);
+				}
+
 				Body.velocity = Vector2.zero;
 				break;
 
