@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-	public Player player;
-	
+	[SerializeField]
+	private Player player;
+
 	/// <summary>
 	/// Provides qick access to the player entity
 	/// </summary>
-	public static Player Player { get { return Instance.player; } }
+	public static Player Player
+	{
+		get
+		{
+			if (Instance.player == null)
+				Instance.player = FindObjectOfType<Player>();
+
+			return Instance.player;
+		}
+	}
 }

@@ -5,8 +5,28 @@ namespace ObjectPoolInternal
 	[System.Serializable]
 	public struct RegistarItem
 	{
-		public string name;
+		[SerializeField]
+		private string name;
 
-		public GameObject gameObject;
+		public string Name
+		{
+			get
+			{
+				if (name == null || name == "")
+					return obj.name;
+				return name;
+			}
+		}
+
+		[SerializeField]
+		private GameObject obj;
+
+		public GameObject Obj
+		{
+			get
+			{
+				return obj;
+			}
+		}
 	}
 }

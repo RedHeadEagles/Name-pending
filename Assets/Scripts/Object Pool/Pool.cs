@@ -16,7 +16,7 @@ namespace ObjectPoolInternal
 		private readonly GameObject master;
 
 		/// <summary>
-		/// The name of this cluser
+		/// The name of this cluster
 		/// </summary>
 		private readonly string name;
 
@@ -25,15 +25,20 @@ namespace ObjectPoolInternal
 		/// </summary>
 		private Stack<GameObject> spawnable = new Stack<GameObject>();
 
-		public Pool(GameObject master)
+		public Pool(GameObject master, string name)
 		{
-			this.master = master;
-			name = master.name;
+			this.name = name;
 
-			master.name += " (master)";
+			if(master.scene.name == null)
+				master = GameObject.Instantiate(master, container);
+
+			this.master = master;
+
+			master.name = name + " (master)";
 
 			container = new GameObject(name).transform;
 			container.SetParent(ObjectPool.Container);
+			master.transform.position = Vector3.zero;
 
 			master.transform.SetParent(container);
 

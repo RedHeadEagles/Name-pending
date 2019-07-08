@@ -5,19 +5,44 @@ using ObjectPoolInternal;
 /// <summary>
 /// Speeds up object creation by instead reusing objects rather than destroying them when finished
 /// </summary>
-[RequireComponent(typeof(PoolRegistar))]
 public sealed class ObjectPool : MonoSingleton<ObjectPool>
 {
-	private static Dictionary<string, Pool> pools = new Dictionary<string, Pool>();
+	/// <summary>
+	/// GameObjects to register into the ObjectPool at the start
+	/// </summary>
+	public List<RegistarItem> registars = new List<RegistarItem>();
+
+	private static Dictionary<string, Pool> pools = null;
+
+	private static Dictionary<string, Pool> Pools
+	{
+		get
+		{
+			if(pools == null)
+			{
+				pools = new Dictionary<string, Pool>();
+
+				foreach (var item in Instance.registars)
+					Register(item.Name, item.Obj);
+			}
+
+			return pools;
+		}
+	}
 
 	public static Transform Container { get { return Instance.transform; } }
+
+	protected override void OnFirstRun()
+	{
+		if (Pools == null) { }
+	}
 
 	/// <summary>
 	/// Check if the pool already has a registar in it
 	/// </summary>
 	public static bool IsRegistered(string name)
 	{
-		return pools.ContainsKey(name);
+		return Pools.ContainsKey(name);
 	}
 
 	/// <summary>
@@ -36,8 +61,6 @@ public sealed class ObjectPool : MonoSingleton<ObjectPool>
 	/// <param name="obj">The object to be used as the master</param>
 	public static void Register(string name, GameObject obj)
 	{
-		obj.name = name;
-
 		if (IsRegistered(name))
 		{
 			Debug.LogWarning("ObjectPool::Attempted to register an object that is already registered: " + obj.name);
@@ -56,7 +79,7 @@ public sealed class ObjectPool : MonoSingleton<ObjectPool>
 			return;
 		}
 
-		pools[name] = new Pool(obj);
+		Pools[name] = new Pool(obj, name);
 	}
 
 	/// <summary>
@@ -66,14 +89,14 @@ public sealed class ObjectPool : MonoSingleton<ObjectPool>
 	public static void Deregister(string name)
 	{
 		if (IsRegistered(name))
-			pools[name].Clear();
+			Pools[name].Clear();
 		else
 			Debug.LogError("ObjectPool::Cannot deregister a non extant pool");
 	}
 
 	public static GameObject Spawn(string name, IPoolSpawner spawner = null)
 	{
-		var pool = pools[name];
+		var pool = Pools[name];
 
 		GameObject spawn = pool.Rent();
 
@@ -96,7 +119,7 @@ public sealed class ObjectPool : MonoSingleton<ObjectPool>
 	public static void Despawn(GameObject obj)
 	{
 		if (IsRegistered(obj.name))
-			pools[obj.name].Return(obj);
+			Pools[obj.name].Return(obj);
 		else
 			Destroy(obj);
 	}
@@ -106,15 +129,15 @@ public sealed class ObjectPool : MonoSingleton<ObjectPool>
 	/// </summary>
 	public static void Clean()
 	{
-		foreach (var pool in pools.Values)
+		foreach (var pool in Pools.Values)
 			pool.Clean();
 	}
 
 	public static void Clear()
 	{
-		foreach (var pool in pools.Values)
+		foreach (var pool in Pools.Values)
 			pool.Clear();
 
-		pools.Clear();
+		Pools.Clear();
 	}
 }

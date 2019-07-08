@@ -69,8 +69,8 @@
     <Compile Include="Assets\Scripts\Object Pool\IPoolSpawner.cs" />
     <Compile Include="Assets\Scripts\Object Pool\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Object Pool\Pool.cs" />
-    <Compile Include="Assets\Scripts\Object Pool\PoolRegistar.cs" />
     <Compile Include="Assets\Scripts\Object Pool\RegistarItem.cs" />
+    <Compile Include="Assets\Scripts\Object Pool\RegistarItemPropertyDrawer.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Stats\Health.cs" />
     <Compile Include="Assets\Scripts\Stats\Stamina.cs" />

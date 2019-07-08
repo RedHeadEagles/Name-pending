@@ -5,6 +5,9 @@
 /// </summary>
 public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
+	[SerializeField]
+	private bool dontDestroyOnLoad = true;
+
 	private static T instance = null;
 
 	public static T Instance
@@ -34,6 +37,11 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 			Destroy(this);
 			return;
 		}
+
+		transform.position = Vector3.zero;
+
+		if (dontDestroyOnLoad)
+			DontDestroyOnLoad(gameObject);
 
 		OnFirstRun();
 	}
