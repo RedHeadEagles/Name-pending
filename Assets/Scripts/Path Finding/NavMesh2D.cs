@@ -18,12 +18,13 @@ public class NavMesh2D : MonoBehaviour
 	public float size = 1;
 
 	[SerializeField]
-	[HideInInspector]
-	private int width;
+	private Vector2 origin;
 
 	[SerializeField]
-	[HideInInspector]
-	private int height;
+	public int width;
+
+	[SerializeField]
+	public int height;
 
 	[SerializeField]
 	private NavVertex[] vertices;
@@ -48,6 +49,7 @@ public class NavMesh2D : MonoBehaviour
 
 		var min = collider.bounds.min;
 		var max = collider.bounds.max;
+		origin = min;
 
 		Vector2 bounds = new Vector2(max.x - min.x, max.y - min.y);
 		width = (int)(bounds.x / size) + 1;
@@ -63,7 +65,7 @@ public class NavMesh2D : MonoBehaviour
 			{
 				var location = new Vector3(x, y, 0) * size;
 				location += min;
-				vertices[x + width * y] = new NavVertex(location);
+				vertices[x + width * y] = new NavVertex(new Vector2Int(x, y), location);
 			}
 		}
 
@@ -80,7 +82,7 @@ public class NavMesh2D : MonoBehaviour
 				
 				// Link the top vertex
 				var end = GetVertex(x, y + 1);
-				if (vertex.CanPathTo(end, terrainLayer))
+				if (CanPathBetween(vertex, end, terrainLayer))
 				{
 					vertex.Top = end.location;
 					end.Bottom = vertex.location;
@@ -88,7 +90,7 @@ public class NavMesh2D : MonoBehaviour
 
 				// Link the top right vertex
 				end = GetVertex(x + 1, y + 1);
-				if (vertex.CanPathTo(end, terrainLayer))
+				if (CanPathBetween(vertex, end, terrainLayer))
 				{
 					vertex.TopRight = end.location;
 					end.BottomLeft = vertex.location;
@@ -96,7 +98,7 @@ public class NavMesh2D : MonoBehaviour
 
 				// Link the right vertex
 				end = GetVertex(x + 1, y);
-				if(vertex.CanPathTo(end,terrainLayer))
+				if (CanPathBetween(vertex, end, terrainLayer))
 				{
 					vertex.Right = end.location;
 					end.Left = vertex.location;
@@ -104,7 +106,7 @@ public class NavMesh2D : MonoBehaviour
 
 				// Link bottom right vertex
 				end = GetVertex(x + 1, y - 1);
-				if(vertex.CanPathTo(end, terrainLayer))
+				if (CanPathBetween(vertex, end, terrainLayer))
 				{
 					vertex.BottomRight = end.location;
 					end.TopLeft = vertex.location;
@@ -115,17 +117,50 @@ public class NavMesh2D : MonoBehaviour
 		Debug.Log("Done!");
 	}
 
+	public Vector2 ToWorldCords(Vector2Int location)
+	{
+		return new Vector2(location.x, location.y) * size + origin;
+	}
+
+	public bool CanPathBetween(NavVertex a, NavVertex b, int layerMask)
+	{
+		if (a == null || b == null)
+			return false;
+
+		var start = a.worldLocation;
+		var end = b.worldLocation;
+		return Physics2D.Raycast(start, end - start, Vector2.Distance(start, end), layerMask).collider == null;
+	}
+
 	private void OnDrawGizmos()
 	{
 		if (!render || vertices == null)
 			return;
 
 		var color = Gizmos.color;
+		Gizmos.color = Color.green;
 
 		foreach (var vertex in vertices)
 		{
-			Gizmos.color = Color.green;
-			vertex.DrawGizmos();
+			if (vertex == null)
+				continue;
+
+			Gizmos.DrawWireSphere(vertex.worldLocation, 0.1f);
+
+			if (vertex.connections == null)
+				continue;
+			
+			foreach (var link in vertex.connections)
+			{
+				if (link.x == int.MaxValue)
+					continue;
+
+				var end = GetVertex(link.x, link.y);
+				if (end == null)
+					return;
+
+				Gizmos.DrawRay(vertex.worldLocation, end.worldLocation - vertex.worldLocation);
+			}
 		}
 
 		Gizmos.color = color;

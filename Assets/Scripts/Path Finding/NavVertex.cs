@@ -4,66 +4,71 @@ using System.Collections.Generic;
 [System.Serializable]
 public class NavVertex
 {
-	public Vector2 location;
+	public Vector2Int location;
+
+	public Vector2 worldLocation;
 	
-	public Vector2[] connections = new Vector2[8];
+	public Vector2Int[] connections = new Vector2Int[8];
 
 	public int ActiveConnections
 	{
 		get
 		{
+			if (connections == null)
+				return 0;
+
 			int count = 0;
 
 			foreach (var link in connections)
-				count += link == Vector2.positiveInfinity ? 0 : 1;
+				count += link.x < int.MaxValue ? 1 : 0;
 
 			return count;
 		}
 	}
 
-	public Vector2 Left
+	public Vector2Int Left
 	{
 		get { return connections[0]; }
 		set { connections[0] = value; }
 	}
 
-	public Vector2 Right
+	public Vector2Int Right
 	{
 		get { return connections[1]; }
 		set { connections[1] = value; }
 	}
 
-	public Vector2 Top
+	public Vector2Int Top
 	{
 		get { return connections[2]; }
 		set { connections[2] = value; }
 	}
 
-	public Vector2 Bottom
+	public Vector2Int Bottom
 	{
 		get { return connections[3]; }
 		set { connections[3] = value; }
 	}
 
-	public Vector2 TopLeft
+	public Vector2Int TopLeft
 	{
 		get { return connections[4]; }
 		set { connections[4] = value; }
 	}
 
-	public Vector2 TopRight
+	public Vector2Int TopRight
 	{
 		get { return connections[5]; }
 		set { connections[5] = value; }
 	}
 
-	public Vector2 BottomLeft
+	public Vector2Int BottomLeft
 	{
 		get { return connections[6]; }
 		set { connections[6] = value; }
 	}
 
-	public Vector2 BottomRight
+	public Vector2Int BottomRight
 	{
 		get { return connections[7]; }
 		set { connections[7] = value; }
@@ -71,47 +76,22 @@ public class NavVertex
 
 	public NavVertex() { }
 
-	public NavVertex(Vector2 location)
+	public NavVertex(Vector2Int location, Vector2 worldLocation)
 	{
 		this.location = location;
+		this.worldLocation = worldLocation;
 
 		for (int i = 0; i < connections.Length; i++)
-			connections[i] = Vector2.positiveInfinity;
+			connections[i] = new Vector2Int(int.MaxValue, 0);
 	}
 
 	public float DistanceTo(NavVertex vertex)
 	{
-		return Vector2.Distance(location, vertex.location);
+		return Vector2Int.Distance(location, vertex.location);
 	}
 
-	public float DistanceTo(Vector2 location)
+	public float DistanceTo(Vector2Int location)
 	{
-		return Vector2.Distance(this.location, location);
-	}
-
-	public bool CanPathTo(NavVertex end, int layerMask)
-	{
-		if (end == null)
-			return false;
-
-		return Physics2D.Raycast(location, end.location - location, DistanceTo(end), layerMask).collider == null;
-	}
-
-	public bool CanPathBetween(NavVertex a, NavVertex b, int layerMask)
-	{
-		return a.CanPathTo(b, layerMask);
-	}
-
-	public void DrawGizmos()
-	{
-		Gizmos.DrawWireSphere(location, 0.1f);
-
-		foreach (var link in connections)
-		{
-			if (link == null || link == Vector2.positiveInfinity)
-				continue;
-
-			Gizmos.DrawRay(location, link - location);
-		}
+		return Vector2Int.Distance(this.location, location);
 	}
 }
