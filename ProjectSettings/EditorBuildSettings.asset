@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/BugIsland.unity
     guid: d23c7df5cf0c3a84cafaf3b119483b02
   m_configObjects: {}

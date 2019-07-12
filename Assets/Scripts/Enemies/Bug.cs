@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Creeper : Entity
+public class Bug : Entity
 {
 	private enum State
 	{

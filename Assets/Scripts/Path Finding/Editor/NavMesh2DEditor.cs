@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(NavMesh2D))]
+[CustomEditor(typeof(Mesh2D))]
 public class NavMesh2DEditor : Editor
 {
 	public override void OnInspectorGUI()
 	{
 		base.OnInspectorGUI();
+		var mesh = target as Mesh2D;
 
-		if(GUILayout.Button("Rebuild NavMesh"))
+		GUILayout.Space(32);
+		GUILayout.Label(string.Format("Total vertices: {0}", mesh.vertices.Length));
+		if (GUILayout.Button("Rebuild Navigation Mesh"))
 		{
-			var mesh = target as NavMesh2D;
 			mesh.BuildMesh();
 		}
 	}

@@ -11,6 +11,9 @@ public abstract class Entity : MonoBehaviour
 
 	protected float DistanceToPlayer { get; private set; }
 
+	[SerializeField]
+	private LayerMask terrain;
+
 	public Rigidbody2D Body
 	{
 		get

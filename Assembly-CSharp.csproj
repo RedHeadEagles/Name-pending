@@ -60,23 +60,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Attack.cs" />
     <Compile Include="Assets\Scripts\Camera.cs" />
-    <Compile Include="Assets\Scripts\Enemies\Creeper.cs" />
-    <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Boss.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Bug.cs" />
+    <Compile Include="Assets\Scripts\Enemies\NPC.cs" />
     <Compile Include="Assets\Scripts\Entity.cs" />
+    <Compile Include="Assets\Scripts\Equipment.cs" />
+    <Compile Include="Assets\Scripts\EquipmentSlot.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Object Pool\IPoolSpawner.cs" />
     <Compile Include="Assets\Scripts\Object Pool\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Object Pool\Pool.cs" />
     <Compile Include="Assets\Scripts\Object Pool\RegistarItem.cs" />
-    <Compile Include="Assets\Scripts\Path Finding\NavMesh2D.cs" />
-    <Compile Include="Assets\Scripts\Path Finding\NavVertex.cs" />
+    <Compile Include="Assets\Scripts\Path Finding\AStar.cs" />
+    <Compile Include="Assets\Scripts\Path Finding\Mesh2D.cs" />
+    <Compile Include="Assets\Scripts\Path Finding\Point.cs" />
+    <Compile Include="Assets\Scripts\Path Finding\Vertex.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\Stats\Health.cs" />
     <Compile Include="Assets\Scripts\Stats\Stamina.cs" />
     <Compile Include="Assets\Scripts\Stats\Stat.cs" />
+    <Compile Include="Assets\Scripts\Terrain.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Resilio/Sync/Projects/Project-Kominis/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

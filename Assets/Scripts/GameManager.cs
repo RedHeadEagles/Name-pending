@@ -19,4 +19,17 @@ public class GameManager : MonoSingleton<GameManager>
 			return Instance.player;
 		}
 	}
+
+	private Terrain terrain = null;
+
+	public static Terrain Terrain
+	{
+		get
+		{
+			if (Instance.terrain == null)
+				Instance.terrain = FindObjectOfType<Terrain>();
+
+			return Instance.terrain;
+		}
+	}
 }
