@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class Attack : ScriptableObject
+public class Item : ScriptableObject
 {
 	public new string name;
 
-	public float baseDamage = 10;
+	[TextArea(2,10)]
+	public string description;
 
-	public float range = 1;
+	public int value;
 
-	public float staminaCost = 20;
+	public Sprite icon;
 }

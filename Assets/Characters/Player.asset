@@ -9,13 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78dede6d316e1fe4e81e66523811ceda, type: 3}
-  m_Name: Bug
+  m_Script: {fileID: 11500000, guid: 069d354c7591dec4bac29e89c9b24a35, type: 3}
+  m_Name: Player
   m_EditorClassIdentifier: 
-  name: Game Breaking Bug
-  health: 100
-  speed: 10
-  idleSpeed: 0.25
-  damageModifier: 1
-  attacks:
-  - {fileID: 11400000, guid: 0217ec58ed01eae43a9b4f3c6d80e45a, type: 2}
+  baseHealth: 100
+  baseStamina: 100
