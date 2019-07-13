@@ -14,6 +14,8 @@ public class NPC : EntityObject
 	public AggroSettings aggro;
 
 	public Attack[] attacks;
+
+	public Loot[] lootTable;
 }
 
 [System.Serializable]

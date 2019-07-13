@@ -13,4 +13,6 @@ public class Player : EntityObject
 	public Trinket trinket;
 
 	public Special special;
+
+	public int money;
 }

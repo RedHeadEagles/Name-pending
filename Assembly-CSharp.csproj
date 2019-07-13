@@ -60,21 +60,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Characters\NPC.cs" />
-    <Compile Include="Assets\Items\Armor\Armor.cs" />
-    <Compile Include="Assets\Items\Equipment.cs" />
-    <Compile Include="Assets\Items\Special\Special.cs" />
-    <Compile Include="Assets\Items\Trinkets\Trinket.cs" />
-    <Compile Include="Assets\Items\Weapons\Weapon.cs" />
+    <Compile Include="Assets\ScriptableObjects\Armor.cs" />
+    <Compile Include="Assets\ScriptableObjects\EntityObject.cs" />
+    <Compile Include="Assets\ScriptableObjects\Equipment.cs" />
+    <Compile Include="Assets\ScriptableObjects\Gold.cs" />
+    <Compile Include="Assets\ScriptableObjects\Item.cs" />
+    <Compile Include="Assets\ScriptableObjects\Loot.cs" />
+    <Compile Include="Assets\ScriptableObjects\NPC.cs" />
+    <Compile Include="Assets\ScriptableObjects\Player.cs" />
+    <Compile Include="Assets\ScriptableObjects\Special.cs" />
+    <Compile Include="Assets\ScriptableObjects\Trinket.cs" />
+    <Compile Include="Assets\ScriptableObjects\Weapon.cs" />
     <Compile Include="Assets\Scripts\Attack.cs" />
     <Compile Include="Assets\Scripts\Camera.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bug.cs" />
     <Compile Include="Assets\Scripts\Entity.cs" />
-    <Compile Include="Assets\Scripts\EntityObject.cs" />
     <Compile Include="Assets\Scripts\EquipmentSlot.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Object Pool\IPoolSpawner.cs" />
     <Compile Include="Assets\Scripts\Object Pool\ObjectPool.cs" />
@@ -84,7 +87,6 @@
     <Compile Include="Assets\Scripts\Path Finding\Mesh2D.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Point.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Vertex.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\Stats\Health.cs" />
