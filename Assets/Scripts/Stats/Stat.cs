@@ -14,7 +14,8 @@ public class Stat
 	public float Max
 	{
 		get { return max; }
-		set {
+		set
+		{
 			max = value;
 			Current = current;
 		}

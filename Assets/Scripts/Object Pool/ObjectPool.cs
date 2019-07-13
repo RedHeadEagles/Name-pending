@@ -18,7 +18,7 @@ public sealed class ObjectPool : MonoSingleton<ObjectPool>
 	{
 		get
 		{
-			if(pools == null)
+			if (pools == null)
 			{
 				pools = new Dictionary<string, Pool>();
 

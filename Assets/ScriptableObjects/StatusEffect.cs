@@ -10,7 +10,7 @@ public class StatusEffect : ScriptableObject
 	public string description;
 
 	public Sprite icon;
-	
+
 	public float duration;
 
 	[Range(0f, 1f)]

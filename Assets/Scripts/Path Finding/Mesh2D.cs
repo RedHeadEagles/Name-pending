@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class Mesh2D : ScriptableObject
 {
-	[Range(float.Epsilon,10f)]
+	[Range(float.Epsilon, 10f)]
 	public float size = 1;
 
 	[SerializeField]
@@ -162,7 +162,7 @@ public class Mesh2D : ScriptableObject
 				if (vertex == null)
 					continue;
 
-				for (int i = vertex.connections.Count - 1; i>=0; i--)
+				for (int i = vertex.connections.Count - 1; i >= 0; i--)
 				{
 					var link = vertex.connections[i];
 					var end = this[link.x, link.y];
@@ -179,7 +179,7 @@ public class Mesh2D : ScriptableObject
 		var start = GetClosestVertex(origin);
 
 	}
-	
+
 	public void DrawDebug()
 	{
 		var color = Gizmos.color;

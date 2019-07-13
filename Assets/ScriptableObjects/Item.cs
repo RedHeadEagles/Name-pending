@@ -7,7 +7,7 @@ public class Item : ScriptableObject
 {
 	public new string name;
 
-	[TextArea(2,10)]
+	[TextArea(2, 10)]
 	public string description;
 
 	public int value;

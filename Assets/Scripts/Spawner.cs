@@ -13,13 +13,13 @@ public class Spawner : MonoBehaviour
 	public int maxCount = 1;
 
 	public Collider2D area;
-	
-    void Start()
-    {
+
+	void Start()
+	{
 		if (area == null)
 			area = GetComponent<Collider2D>();
 
-		if(area == null)
+		if (area == null)
 		{
 			Debug.LogError(string.Format("Spawner '{0}' has no collider", gameObject.name));
 			return;
@@ -32,7 +32,7 @@ public class Spawner : MonoBehaviour
 		Vector2 min = area.bounds.min;
 		Vector2 max = area.bounds.max;
 
-		while(toSpawn > 0)
+		while (toSpawn > 0)
 		{
 			Vector2 location;
 			do
@@ -46,5 +46,5 @@ public class Spawner : MonoBehaviour
 
 			toSpawn--;
 		}
-    }
+	}
 }

@@ -62,7 +62,7 @@ public class Bug : Entity
 			case State.Chase:
 				nextAttack -= Time.deltaTime;
 
-				if(moveLock > 0)
+				if (moveLock > 0)
 				{
 					moveLock -= Time.deltaTime;
 					break;
@@ -74,11 +74,11 @@ public class Bug : Entity
 				else
 					MoveToward(GameManager.Player, speedChase);
 				break;
-			
+
 			case State.Wander:
 				nextWander -= Time.deltaTime / 2;
 
-				if(nextWander <= 0)
+				if (nextWander <= 0)
 				{
 					nextWander += Random.Range(0f, wanderTime);
 					wanderLocation = Random.insideUnitCircle * wanderRange + home;
@@ -100,7 +100,7 @@ public class Bug : Entity
 				if (DistanceToPlayer > attackRange)
 					state = State.Chase;
 
-				if(nextAttack <= 0)
+				if (nextAttack <= 0)
 				{
 					nextAttack = attackTime;
 					GameManager.Player.health.ApplyDamage(attackDamage);

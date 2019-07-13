@@ -9,11 +9,11 @@ public static class AStar
 		return Vector2Int.Distance(start.location, end.location);
 	}
 
-	private static List<Vector2>BuildPath(Mesh2D mesh, Dictionary<Vertex, Vertex> cameFrom, Vertex start, Vertex end)
+	private static List<Vector2> BuildPath(Mesh2D mesh, Dictionary<Vertex, Vertex> cameFrom, Vertex start, Vertex end)
 	{
 		var path = new List<Vector2>();
 
-		while(end != start)
+		while (end != start)
 		{
 			path.Insert(0, mesh.ToWorldGrid(end.location));
 			end = cameFrom[end];
@@ -22,7 +22,7 @@ public static class AStar
 		return path;
 	}
 
-	public static List<Vector2>FindPath(Mesh2D mesh, Vector2 startLocation, Vector2 endLocation)
+	public static List<Vector2> FindPath(Mesh2D mesh, Vector2 startLocation, Vector2 endLocation)
 	{
 		var start = mesh.GetClosestVertex(startLocation);
 		var end = mesh.GetClosestVertex(endLocation);
@@ -39,7 +39,7 @@ public static class AStar
 		gScore[start] = 0;
 		fScore[start] = EstiamteCost(start, end);
 
-		while(open.Count > 0)
+		while (open.Count > 0)
 		{
 			Vertex current = open[0];
 			open.RemoveAt(0);

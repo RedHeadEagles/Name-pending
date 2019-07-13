@@ -33,7 +33,7 @@ public class Vertex
 
 		for (int i = 0; i < connections.Count; i++)
 		{
-			if(connections[i] == end.location)
+			if (connections[i] == end.location)
 			{
 				connections.RemoveAt(i);
 				break;
@@ -42,7 +42,7 @@ public class Vertex
 
 		for (int i = 0; i < end.connections.Count; i++)
 		{
-			if(end.connections[i] == location)
+			if (end.connections[i] == location)
 			{
 				end.connections.RemoveAt(i);
 				break;

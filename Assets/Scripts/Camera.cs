@@ -11,13 +11,13 @@ public class Camera : MonoBehaviour
 
 	public Vector3 offset = new Vector3(0, 0, -10);
 
-    void Update()
-    {
-        if(tracked != null)
+	void Update()
+	{
+		if (tracked != null)
 		{
 
 			Vector3 end = tracked.transform.position + offset;
 			transform.position = Vector3.Lerp(transform.position, end, trackSpeed * Time.smoothDeltaTime);
 		}
-    }
+	}
 }

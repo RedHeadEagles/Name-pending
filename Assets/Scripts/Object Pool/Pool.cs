@@ -29,7 +29,7 @@ namespace ObjectPoolInternal
 		{
 			this.name = name;
 
-			if(master.scene.name == null)
+			if (master.scene.name == null)
 				master = GameObject.Instantiate(master, container);
 
 			this.master = master;
@@ -84,7 +84,7 @@ namespace ObjectPoolInternal
 		/// </summary>
 		public void Clean()
 		{
-			while(spawnable.Count > 0)
+			while (spawnable.Count > 0)
 				GameObject.Destroy(spawnable.Pop());
 		}
 
