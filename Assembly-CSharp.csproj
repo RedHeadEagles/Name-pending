@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ScriptableObjects\Armor.cs" />
+    <Compile Include="Assets\ScriptableObjects\Buff.cs" />
+    <Compile Include="Assets\ScriptableObjects\Debuff.cs" />
     <Compile Include="Assets\ScriptableObjects\EntityObject.cs" />
     <Compile Include="Assets\ScriptableObjects\Equipment.cs" />
     <Compile Include="Assets\ScriptableObjects\Gold.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Assets\ScriptableObjects\NPC.cs" />
     <Compile Include="Assets\ScriptableObjects\Player.cs" />
     <Compile Include="Assets\ScriptableObjects\Special.cs" />
+    <Compile Include="Assets\ScriptableObjects\StatusEffect.cs" />
     <Compile Include="Assets\ScriptableObjects\Trinket.cs" />
     <Compile Include="Assets\ScriptableObjects\Weapon.cs" />
     <Compile Include="Assets\Scripts\Attack.cs" />
