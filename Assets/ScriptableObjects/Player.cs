@@ -14,6 +14,7 @@ public class Equipment
 }
 
 [CreateAssetMenu]
+[System.Serializable]
 public class Player : Character
 {
 	[Header("Equiped Gear")]
