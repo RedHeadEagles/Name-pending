@@ -20,6 +20,7 @@ MonoBehaviour:
   speed: 30
   walkSpeed: 0.25
   defense: 1
+  walkAnimation: {fileID: 7400000, guid: cbcd0aee643f301498bd44d326e25991, type: 2}
   startingGear:
     armor: {fileID: 0}
     weapon: {fileID: 0}

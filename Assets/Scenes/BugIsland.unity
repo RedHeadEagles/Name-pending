@@ -171,7 +171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &73869138
 Transform:
   m_ObjectHideFlags: 0
@@ -728,7 +728,7 @@ MonoBehaviour:
     regen: 1
   terrain:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   player: {fileID: 11400000, guid: 05a70ede9aed3f848a789c611b78df81, type: 2}
   item: {fileID: 11400000, guid: 0869724298051214caf88e125306c737, type: 2}
   stamina:
@@ -737,6 +737,7 @@ MonoBehaviour:
   healthBar: {fileID: 813191294}
   staminaBar: {fileID: 1688909337}
   speed: 10
+  time: 1
 --- !u!50 &270986163
 Rigidbody2D:
   serializedVersion: 4
@@ -815,7 +816,7 @@ Animator:
   m_GameObject: {fileID: 270986161}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a290a07a060a1e44faa02d455a432cff, type: 2}
+  m_Controller: {fileID: 9100000, guid: 29ac10560cc56c847b76c2b09840ba82, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -71,9 +71,9 @@ public abstract class Entity : MonoBehaviour
 		Move(vector.normalized, speed);
 	}
 
-	public void Move(Vector2 vector, float speed)
+	public void Move(Vector3 vector, float speed)
 	{
-		Body.velocity = vector * speed;
+		body.velocity = vector * speed;
 	}
 
 	public float DistanceTo(Entity entity)

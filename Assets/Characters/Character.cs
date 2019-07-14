@@ -28,4 +28,7 @@ public class Character : ScriptableObject
 	/// 10 damage to -5 defense = 15 damage
 	/// </summary>
 	public int defense = 1;
+
+	[Header("Animations")]
+	public AnimationClip walkAnimation;
 }

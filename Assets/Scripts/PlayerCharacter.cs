@@ -19,6 +19,9 @@ public class PlayerCharacter : Entity
 
 	public float speed = 10;
 
+	[Range(0f,1f)]
+	public float time = 1;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -29,6 +32,7 @@ public class PlayerCharacter : Entity
 	// Update is called once per frame
 	protected override void OnUpdate()
 	{
+		Time.timeScale = time;
 		float x = Input.GetAxis("Horizontal");
 		float y = Input.GetAxis("Vertical");
 		Vector2 vector = new Vector2(x, y);
