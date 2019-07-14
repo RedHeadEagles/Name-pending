@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class NPC : EntityObject
+public class NPC : Character
 {
 	[Range(0, 1f)]
 	[Tooltip("Percentage of movement speed to use when idle/wandering")]
@@ -15,7 +15,7 @@ public class NPC : EntityObject
 
 	public Attack[] attacks;
 
-	public Loot[] lootTable;
+	public LootTable lootTable;
 }
 
 [System.Serializable]

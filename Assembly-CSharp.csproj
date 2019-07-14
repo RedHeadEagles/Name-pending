@@ -60,26 +60,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ScriptableObjects\Armor.cs" />
+    <Compile Include="Assets\Characters\Character.cs" />
+    <Compile Include="Assets\Items\Armor\Armor.cs" />
+    <Compile Include="Assets\Items\Backpacks\Backpack.cs" />
+    <Compile Include="Assets\Items\Backpacks\Slot.cs" />
+    <Compile Include="Assets\Items\Item.cs" />
+    <Compile Include="Assets\Items\Special\Special.cs" />
+    <Compile Include="Assets\Items\Trinkets\Trinket.cs" />
+    <Compile Include="Assets\Items\Weapons\Weapon.cs" />
     <Compile Include="Assets\ScriptableObjects\Buff.cs" />
     <Compile Include="Assets\ScriptableObjects\Debuff.cs" />
-    <Compile Include="Assets\ScriptableObjects\EntityObject.cs" />
-    <Compile Include="Assets\ScriptableObjects\Equipment.cs" />
-    <Compile Include="Assets\ScriptableObjects\Gold.cs" />
-    <Compile Include="Assets\ScriptableObjects\Item.cs" />
     <Compile Include="Assets\ScriptableObjects\Loot.cs" />
+    <Compile Include="Assets\ScriptableObjects\LootTable.cs" />
     <Compile Include="Assets\ScriptableObjects\NPC.cs" />
     <Compile Include="Assets\ScriptableObjects\Player.cs" />
-    <Compile Include="Assets\ScriptableObjects\Special.cs" />
+    <Compile Include="Assets\ScriptableObjects\Stats.cs" />
     <Compile Include="Assets\ScriptableObjects\StatusEffect.cs" />
-    <Compile Include="Assets\ScriptableObjects\Trinket.cs" />
-    <Compile Include="Assets\ScriptableObjects\Weapon.cs" />
     <Compile Include="Assets\Scripts\Attack.cs" />
     <Compile Include="Assets\Scripts\Camera.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bug.cs" />
     <Compile Include="Assets\Scripts\Entity.cs" />
-    <Compile Include="Assets\Scripts\EquipmentSlot.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Object Pool\IPoolSpawner.cs" />

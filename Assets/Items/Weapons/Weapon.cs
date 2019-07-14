@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Equipment/Weapon")]
-public class Weapon : Equipment
+[System.Serializable]
+public class Weapon : Item
 {
 	public float lightDamage;
 

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: SoggyStick
   m_EditorClassIdentifier: 
   name: Soggy Stick
-  description: Won't help you make a fire but still useful, somehow...
+  description: Won't help you start a fire but still useful, somehow...
   value: 0
+  maxStack: 1
   icon: {fileID: 0}
   lightDamage: 10
   lightStaminaUsage: 10

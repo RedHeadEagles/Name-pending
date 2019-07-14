@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Loot
+public class LootTable
 {
-	public Item item;
+	public int minGold;
 
-	public float chance;
+	public int maxGold;
+
+	public Loot[] items;
 }

@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu]
-public class Player : EntityObject
+[System.Serializable]
+public class Equipment
 {
-	public Item[] inventory = new Item[12];
-
 	public Armor armor;
 
 	public Weapon weapon;
@@ -13,6 +11,14 @@ public class Player : EntityObject
 	public Trinket trinket;
 
 	public Special special;
+}
 
-	public int money;
+[CreateAssetMenu]
+public class Player : Character
+{
+	[Header("Equiped Gear")]
+
+	public Backpack backpack;
+
+	public Equipment equipment = new Equipment();
 }

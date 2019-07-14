@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Equipment/Special")]
-public class Special : Equipment
+[System.Serializable]
+public class Special : Item
 {
 
 }
