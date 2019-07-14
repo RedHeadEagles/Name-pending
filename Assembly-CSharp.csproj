@@ -82,6 +82,9 @@
     <Compile Include="Assets\Scripts\Enemies\Bug.cs" />
     <Compile Include="Assets\Scripts\Entity.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\IO\IO.cs" />
+    <Compile Include="Assets\Scripts\IO\Path.cs" />
+    <Compile Include="Assets\Scripts\IO\PathSegment.cs" />
     <Compile Include="Assets\Scripts\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Object Pool\IPoolSpawner.cs" />
     <Compile Include="Assets\Scripts\Object Pool\ObjectPool.cs" />

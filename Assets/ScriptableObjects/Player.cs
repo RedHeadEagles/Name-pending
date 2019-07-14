@@ -11,15 +11,13 @@ public class Equipment
 	public Trinket trinket;
 
 	public Special special;
+
+	public Backpack backpack;
 }
 
 [CreateAssetMenu]
-[System.Serializable]
 public class Player : Character
 {
-	[Header("Equiped Gear")]
-
-	public Backpack backpack;
-
-	public Equipment equipment = new Equipment();
+	[Header("Starting Gear")]
+	public Equipment startingGear = new Equipment();
 }

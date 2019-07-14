@@ -1,0 +1,28 @@
+{
+    "name": "",
+    "health": 100,
+    "stamina": 100,
+    "staminaRegen": 0.009999999776482582,
+    "attack": 1,
+    "speed": 1,
+    "walkSpeed": 0.25,
+    "defense": 1,
+    "statusEffects": [],
+    "backpack": {
+        "instanceID": 14500
+    },
+    "equipment": {
+        "armor": {
+            "instanceID": 0
+        },
+        "weapon": {
+            "instanceID": 14612
+        },
+        "trinket": {
+            "instanceID": 0
+        },
+        "special": {
+            "instanceID": 0
+        }
+    }
+}

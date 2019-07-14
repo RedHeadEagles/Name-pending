@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class PlayerCharacter : Entity
 {
+	public Player player;
+
+	public Item item;
+
 	public Stamina stamina = new Stamina(100);
 
 	public Slider healthBar;
@@ -18,6 +22,7 @@ public class PlayerCharacter : Entity
 	// Start is called before the first frame update
 	void Start()
 	{
+		IO.WriteJson("player.json", player);
 		home = transform.position;
 	}
 

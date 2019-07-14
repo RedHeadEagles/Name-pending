@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
-[System.Serializable]
 public class Character : ScriptableObject
 {
 	public new string name;
@@ -30,7 +28,4 @@ public class Character : ScriptableObject
 	/// 10 damage to -5 defense = 15 damage
 	/// </summary>
 	public int defense = 1;
-
-	[Header("Current buffs and debuffs")]
-	public List<StatusEffect> statusEffects = new List<StatusEffect>();
 }

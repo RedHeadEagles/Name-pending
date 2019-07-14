@@ -729,6 +729,8 @@ MonoBehaviour:
   terrain:
     serializedVersion: 2
     m_Bits: 0
+  player: {fileID: 11400000, guid: 05a70ede9aed3f848a789c611b78df81, type: 2}
+  item: {fileID: 11400000, guid: 0869724298051214caf88e125306c737, type: 2}
   stamina:
     max: 100
     current: 100
