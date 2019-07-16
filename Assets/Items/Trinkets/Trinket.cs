@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Equipment/Trinket")]
-public class Trinket : Item
+[CreateAssetMenu(menuName = "Items/Equipment/Trinket")]
+public class Trinket : Equipment
 {
 
 }

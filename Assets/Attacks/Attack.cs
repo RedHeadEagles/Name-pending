@@ -11,7 +11,7 @@ public class Attack : ScriptableObject
 
 	public float range = 1;
 
-	public float staminaCost = 20;
+	public float energyCost = 20;
 
 	public StatusEffect[] statusEffects;
 }

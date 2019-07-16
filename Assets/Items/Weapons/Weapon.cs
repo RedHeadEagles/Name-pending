@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Equipment/Weapon")]
-public class Weapon : Item
+[CreateAssetMenu(menuName = "Items/Equipment/Weapon")]
+public class Weapon : Equipment
 {
-	public float lightDamage;
+	public Attack lightAttack;
 
-	public float lightStaminaUsage;
+	public Attack heavyAttack;
 
-	public float heavyDamage;
-
-	public float heavyStaminaUsage;
+	public Attack uniqueAttack;
 }

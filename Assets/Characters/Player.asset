@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   name: 
-  health: 100
-  stamina: 100
-  staminaRegen: 0.01
-  attack: 10
-  speed: 30
+  stats:
+    health: 100
+    energy: 100
+    energyRegen: 1
+    attack: -8
+    defense: 1
+    speed: 1
   walkSpeed: 0.25
-  defense: 1
   walkAnimation: {fileID: 7400000, guid: cbcd0aee643f301498bd44d326e25991, type: 2}
-  startingGear:
-    armor: {fileID: 0}
-    weapon: {fileID: 0}
-    trinket: {fileID: 0}
-    special: {fileID: 0}
-    backpack: {fileID: 11400000, guid: 49e4382be1e1c304dae83cd2101ecff0, type: 2}
+  startArmor: {fileID: 0}
+  startWeapon: {fileID: 0}
+  startTrinket: {fileID: 0}
+  startSpecial: {fileID: 0}
+  startBackpack: {fileID: 0}

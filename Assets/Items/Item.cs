@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName ="Items/Item")]
 public class Item : ScriptableObject
 {
 	public new string name;
@@ -10,10 +10,10 @@ public class Item : ScriptableObject
 	[TextArea(2, 10)]
 	public string description;
 
-	public uint value;
+	public int value;
 
 	[Range(0, 60)]
-	public uint maxStack = 1;
+	public int maxStack = 1;
 	
 	public Sprite icon;
 }

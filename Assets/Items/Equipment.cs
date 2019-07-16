@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Items/Equipment/Armor")]
-public class Armor : Equipment
+public class Equipment : Item
 {
-
+	public Stats stats = new Stats();
 }

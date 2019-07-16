@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Equipment/Special")]
-public class Special : Item
+[CreateAssetMenu(menuName = "Items/Equipment/Special")]
+public class Special : Equipment
 {
 
 }

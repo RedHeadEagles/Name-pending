@@ -17,7 +17,13 @@ MonoBehaviour:
   value: 0
   maxStack: 1
   icon: {fileID: 0}
-  lightDamage: 10
-  lightStaminaUsage: 10
-  heavyDamage: 25
-  heavyStaminaUsage: 30
+  stats:
+    health: 0
+    energy: 0
+    energyRegen: 0
+    attack: 0
+    defense: 0
+    speed: 0
+  lightAttack: {fileID: 11400000, guid: ac1087776cd9f5a4fb84a4ac43743c1d, type: 2}
+  heavyAttack: {fileID: 11400000, guid: c16f6c5281500434a85bbb621c2e8379, type: 2}
+  uniqueAttack: {fileID: 0}

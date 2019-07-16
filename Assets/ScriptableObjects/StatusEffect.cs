@@ -13,6 +13,5 @@ public class StatusEffect : ScriptableObject
 
 	public float duration;
 
-	[Range(0f, 1f)]
-	public float applyChance = 1;
+	public Stats stats = new Stats();
 }
