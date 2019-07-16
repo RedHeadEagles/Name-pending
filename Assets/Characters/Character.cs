@@ -12,7 +12,7 @@ public class Character : ScriptableObject
 	[Range(0f, 1f)]
 	public float staminaRegen = 0.01f;
 
-	public uint attack = 1;
+	public uint attackPower = 1;
 
 	public uint speed = 1;
 
