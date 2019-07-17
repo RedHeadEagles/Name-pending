@@ -1,55 +1,76 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public static class AStar
+public class AStar
 {
-	private static float EstiamteCost(Vertex start, Vertex end)
+	private class Heap
 	{
-		return Vector2Int.Distance(start.location, end.location);
-	}
+		private List<Node> heap = new List<Node>();
 
-	private static List<Vector2> BuildPath(Mesh2D mesh, Dictionary<Vertex, Vertex> cameFrom, Vertex start, Vertex end)
-	{
-		var path = new List<Vector2>();
+		public bool IsEmpty { get { return heap.Count == 0; } }
 
-		while (end != start)
+		public void Insert(Node data)
 		{
-			path.Insert(0, mesh.ToWorldGrid(end.location));
-			end = cameFrom[end];
+			heap.Insert(0, data);
 		}
 
-		return path;
+		public Node Pop()
+		{
+			if (IsEmpty)
+				return default;
+
+			heap = heap.OrderBy(i => i.fScore).ToList();
+			Node d = heap[0];
+			heap.RemoveAt(0);
+			return d;
+		}
 	}
 
-	public static List<Vector2> FindPath(Mesh2D mesh, Vector2 startLocation, Vector2 endLocation)
+	private class Node
 	{
-		var start = mesh.GetClosestVertex(startLocation);
-		var end = mesh.GetClosestVertex(endLocation);
+		public Vector2Int location;
 
-		if (start == null || end == null)
-			return null;
+		public float gScore = float.MaxValue;
 
-		var open = new List<Vertex> { start };
-		var closed = new List<Vertex>();
-		var cameFrom = new Dictionary<Vertex, Vertex>();
-		var gScore = new Dictionary<Vertex, float>();
-		var fScore = new Dictionary<Vertex, float>();
+		public float fScore = float.MaxValue;
 
-		gScore[start] = 0;
-		fScore[start] = EstiamteCost(start, end);
+		public Node cameFrom;
 
-		while (open.Count > 0)
+		public Node(Vector2Int location)
 		{
-			Vertex current = open[0];
-			open.RemoveAt(0);
+			this.location = location;
+		}
+	}
 
-			if (current == end)
-				return BuildPath(mesh, cameFrom, start, end);
+	private static float Cost(Vector2Int a, Vector2Int b)
+	{
+		return Vector2Int.Distance(a, b);
+	}
 
-			foreach (var neighbor in current.connections)
+	public static List<Vector2> FindPath(Mesh2D mesh, Vector2Int start, Vector2Int end)
+	{
+		var map = new Node[mesh.width, mesh.height];
+		var open = new Heap();
+
+		for (int x = 0; x < mesh.width; x++)
+			for (int y = 0; y < mesh.height; y++)
+				map[x, y] = new Node(new Vector2Int(x, y));
+
+		map[start.x, start.y].gScore = 0;
+		map[start.x, start.y].fScore = Cost(start, end);
+
+		while(!open.IsEmpty)
+		{
+			var current = open.Pop();
+			if (current.location == end)
+				return null;
+
+			var vertex = mesh[current.location.x, current.location.y];
+			foreach (var neighbor in vertex)
 			{
-				//var score = gScore[current] + EstiamteCost(current, neighbor);
+
 			}
 		}
 
