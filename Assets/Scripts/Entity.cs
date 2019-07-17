@@ -1,17 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Entity : MonoBehaviour
 {
-	
+	[SerializeField]
+	protected CharacterData character;
+
+	public CharacterData CharacterData
+	{
+		get { return character; }
+		set
+		{
+			character = value;
+			RecalculateStats();
+		}
+	}
+
+	/// <summary>
+	/// Represents how much health this entity has
+	/// </summary>
+	public readonly Stat health = new Stat(0.05f);
+
+	/// <summary>
+	/// Represents how much energy this entity has
+	/// </summary>
+	public readonly Stat energy = new Stat(0.05f);
+
+	public readonly Stat energyRegen = new Stat(0.0001f);
+
+	public readonly Stat defense = new Stat(0);
+
+	/// <summary>
+	/// How many units per second this entity can move
+	/// </summary>
+	public readonly Stat speed = new Stat(0.05f);
+
+	/// <summary>
+	/// How many units per secons this entity walks at
+	/// </summary>
+	public float WalkSpeed { get; protected set; }
+
 	private Rigidbody2D body = null;
 
 	protected float DistanceToPlayer { get; private set; }
-
-	[SerializeField]
-	private LayerMask terrain;
 
 	public Rigidbody2D Body
 	{
@@ -24,15 +55,30 @@ public abstract class Entity : MonoBehaviour
 		}
 	}
 
-	public bool IsDead { get { return false; } }
+	public bool IsDead { get { return health.Current == 0; } }
 
-	public bool ISAlive { get { return true; } }
+	public bool IsAlive { get { return health.Current > 0; } }
 
 	// Start is called before the first frame update
 	void Awake()
 	{
 		Body.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 		Body.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+		health.Base = character.baseHealth;
+		health.Level = character.stats.health;
+
+		energy.Base = character.baseEnergy;
+		energy.Level = character.stats.energy;
+
+		energyRegen.Base = character.baseEnergyRegen;
+		energyRegen.Level = character.stats.energyRegen;
+
+		defense.Base = character.baseDefense;
+		defense.Level = character.stats.defense;
+
+		speed.Base = character.baseSpeed;
+		speed.Level = character.stats.speed;
 	}
 
 	// Update is called once per frame
@@ -83,5 +129,25 @@ public abstract class Entity : MonoBehaviour
 	public float DistanceTo(Vector2 location)
 	{
 		return Vector2.Distance(transform.position, location);
+	}
+
+	public float ScaleStat(float baseValue, int level, float effect)
+	{
+		return baseValue * (1f + effect * level);
+	}
+
+	public void RecalculateStats()
+	{
+		health.Recalculate();
+		energy.Recalculate();
+		energyRegen.Recalculate();
+		speed.Recalculate();
+		WalkSpeed = speed.Current * character.walkSpeed;
+		defense.Recalculate();
+	}
+
+	public void ApplyDamage(float amount)
+	{
+		health.Current -= amount;
 	}
 }

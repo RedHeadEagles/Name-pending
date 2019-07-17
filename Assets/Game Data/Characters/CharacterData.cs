@@ -15,6 +15,8 @@ public class CharacterData : ScriptableObject
 
 	public float baseSpeed = 1;
 
+	public float baseDefense = 0;
+
 	public StatsData stats = new StatsData();
 
 	[Range(0f, 1f)]

@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerCharacter : Entity
+public class Player : Entity
 {
-	public PlayerData player;
+	private PlayerData playerData;
 
 	public ItemData item;
 
 	public Slider healthBar;
 
 	public Slider staminaBar;
-
-	private Vector2 home;
+	
 
 	public float speed = 10;
 
@@ -23,8 +22,9 @@ public class PlayerCharacter : Entity
 	// Start is called before the first frame update
 	void Start()
 	{
-		IO.WriteJson("player.json", player);
-		home = transform.position;
+		playerData = character as PlayerData;
+		transform.position = Zone.Current.playerSpawnLocation;
+		Debug.Log(health.Max);
 	}
 
 	// Update is called once per frame
@@ -39,7 +39,6 @@ public class PlayerCharacter : Entity
 
 	protected override void OnDeath()
 	{
-		transform.position = home;
 		gameObject.SetActive(true);
 	}
 }

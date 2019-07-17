@@ -96,9 +96,11 @@
     <Compile Include="Assets\Scripts\Path Finding\Mesh2D.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Point.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Vertex.cs" />
-    <Compile Include="Assets\Scripts\PlayerCharacter.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
+    <Compile Include="Assets\Scripts\Stat.cs" />
     <Compile Include="Assets\Scripts\Terrain.cs" />
+    <Compile Include="Assets\Scripts\Zone.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/GitProjects/Project-Kominis/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
