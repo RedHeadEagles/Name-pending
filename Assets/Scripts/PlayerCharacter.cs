@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerCharacter : Entity
 {
-	public Player player;
+	public PlayerData player;
 
 	public ItemData item;
 

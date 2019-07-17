@@ -61,24 +61,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Game Data\Attacks\Attack.cs" />
-    <Compile Include="Assets\Game Data\Characters\Character.cs" />
-    <Compile Include="Assets\Game Data\Chests\ContainerData.cs" />
-    <Compile Include="Assets\Game Data\Effects\Buffs\Buff.cs" />
-    <Compile Include="Assets\Game Data\Effects\Debuffs\Debuff.cs" />
-    <Compile Include="Assets\Game Data\Effects\StatusEffect.cs" />
-    <Compile Include="Assets\Game Data\Items\Equipment\Armor\Armor.cs" />
-    <Compile Include="Assets\Game Data\Items\Equipment\Backpacks\Backpack.cs" />
-    <Compile Include="Assets\Game Data\Items\Equipment\Backpacks\Slot.cs" />
-    <Compile Include="Assets\Game Data\Items\Equipment\Equipment.cs" />
-    <Compile Include="Assets\Game Data\Items\Equipment\Special\Special.cs" />
-    <Compile Include="Assets\Game Data\Items\Equipment\Trinkets\Trinket.cs" />
+    <Compile Include="Assets\Game Data\Characters\CharacterData.cs" />
+    <Compile Include="Assets\Game Data\Containers\ContainerData.cs" />
+    <Compile Include="Assets\Game Data\Effects\Buffs\BuffData.cs" />
+    <Compile Include="Assets\Game Data\Effects\Debuffs\DebuffData.cs" />
+    <Compile Include="Assets\Game Data\Effects\EffectData.cs" />
+    <Compile Include="Assets\Game Data\Items\Equipment\Armor\ArmorData.cs" />
+    <Compile Include="Assets\Game Data\Items\Equipment\Backpacks\BackpackData.cs" />
+    <Compile Include="Assets\Game Data\Items\Equipment\EquipmentData.cs" />
+    <Compile Include="Assets\Game Data\Items\Equipment\Special\SpecialData.cs" />
+    <Compile Include="Assets\Game Data\Items\Equipment\Trinkets\TrinketData.cs" />
     <Compile Include="Assets\Game Data\Items\Equipment\Weapons\Weapon.cs" />
-    <Compile Include="Assets\Game Data\Items\Item.cs" />
-    <Compile Include="Assets\Game Data\Loot.cs" />
+    <Compile Include="Assets\Game Data\Items\ItemData.cs" />
     <Compile Include="Assets\Game Data\LootTable.cs" />
     <Compile Include="Assets\Game Data\NPC.cs" />
-    <Compile Include="Assets\Game Data\Player.cs" />
-    <Compile Include="Assets\Game Data\Stats.cs" />
+    <Compile Include="Assets\Game Data\PlayerData.cs" />
+    <Compile Include="Assets\Game Data\StatsData.cs" />
     <Compile Include="Assets\Scripts\Camera.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bug.cs" />

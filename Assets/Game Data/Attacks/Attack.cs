@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class Attack : ScriptableObject
+public class AttackData : ScriptableObject
 {
 	public new string name;
 
@@ -13,5 +13,5 @@ public class Attack : ScriptableObject
 
 	public float energyCost = 20;
 
-	public StatusEffect[] statusEffects;
+	public EffectData[] statusEffects;
 }

@@ -1,12 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[System.Serializable]
-public class Stats
+﻿[System.Serializable]
+public class StatsData
 {
+	/// <summary>
+	/// Each point increases health by 5%
+	/// </summary>
 	public int health;
 
+	/// <summary>
+	/// Each point increases energy by 5%
+	/// </summary>
 	public int energy;
 
 	/// <summary>
@@ -14,6 +16,9 @@ public class Stats
 	/// </summary>
 	public int energyRegen;
 
+	/// <summary>
+	/// Each point in attack increases damage by 5%
+	/// </summary>
 	public int attack;
 
 	/// <summary>
@@ -25,5 +30,8 @@ public class Stats
 	/// </summary>
 	public int defense;
 
+	/// <summary>
+	/// Each point in speed increases movement speed by 5%, passive dodge by 0.01% and energy regen by 0.1%
+	/// </summary>
 	public int speed;
 }

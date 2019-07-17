@@ -13,7 +13,7 @@ public class NPC : CharacterData
 
 	public AggroSettings aggro;
 
-	public Attack[] attacks;
+	public AttackData[] attacks;
 
 	public LootTableData lootTable;
 }

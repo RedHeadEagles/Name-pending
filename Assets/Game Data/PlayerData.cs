@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu]
-public class Player : CharacterData
+[CreateAssetMenu(menuName ="Game/Characters/Player")]
+public class PlayerData : CharacterData
 {
 	[Header("Starting Gear")]
 	public Armor startArmor;

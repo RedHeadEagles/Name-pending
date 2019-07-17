@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a331b8c1ee94a51479623405ce8a6a53, type: 3}
   m_Name: SmallChest
   m_EditorClassIdentifier: 
+  lootTable: {fileID: 11400000, guid: 6a584524195c0f44ea1671c8679f1c4c, type: 2}
+  sprite: {fileID: 0}

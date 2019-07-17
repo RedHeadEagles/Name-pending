@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Game/Equipment/Weapon")]
 public class Weapon : EquipmentData
 {
-	public Attack lightAttack;
+	public AttackData lightAttack;
 
-	public Attack heavyAttack;
+	public AttackData heavyAttack;
 
-	public Attack uniqueAttack;
+	public AttackData uniqueAttack;
 }

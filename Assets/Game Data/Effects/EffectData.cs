@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatusEffect : ScriptableObject
+[CreateAssetMenu(menuName ="Game/Effects/Effect")]
+public class EffectData : ScriptableObject
 {
 	public new string name;
 
@@ -13,5 +14,5 @@ public class StatusEffect : ScriptableObject
 
 	public float duration;
 
-	public Stats stats = new Stats();
+	public StatsData statChanges;
 }
