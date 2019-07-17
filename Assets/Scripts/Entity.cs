@@ -5,8 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Entity : MonoBehaviour
 {
-	public Health health = new Health(100);
-
+	
 	private Rigidbody2D body = null;
 
 	protected float DistanceToPlayer { get; private set; }
@@ -25,9 +24,9 @@ public abstract class Entity : MonoBehaviour
 		}
 	}
 
-	public bool IsDead { get { return health.Current == 0; } }
+	public bool IsDead { get { return false; } }
 
-	public bool IsNotDead { get { return health.Current > 0; } }
+	public bool ISAlive { get { return true; } }
 
 	// Start is called before the first frame update
 	void Awake()
@@ -41,14 +40,14 @@ public abstract class Entity : MonoBehaviour
 	{
 		DistanceToPlayer = GameManager.Player.IsDead ? float.MaxValue : DistanceTo(GameManager.Player);
 
-		if (health.IsDead)
+		if (IsDead)
 		{
 			gameObject.SetActive(false);
 			OnDeath();
 			return;
 		}
 
-		health.DoRegen(Time.deltaTime);
+		//health.DoRegen(Time.deltaTime);
 
 		OnUpdate();
 	}

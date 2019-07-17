@@ -7,9 +7,7 @@ public class PlayerCharacter : Entity
 {
 	public Player player;
 
-	public Item item;
-
-	public Stamina stamina = new Stamina(100);
+	public ItemData item;
 
 	public Slider healthBar;
 
@@ -37,15 +35,11 @@ public class PlayerCharacter : Entity
 		float y = Input.GetAxis("Vertical");
 		Vector2 vector = new Vector2(x, y);
 		Move(vector, speed);
-
-		healthBar.value = health.Percentage;
-		staminaBar.value = stamina.Percentage;
 	}
 
 	protected override void OnDeath()
 	{
 		transform.position = home;
 		gameObject.SetActive(true);
-		health.Reset();
 	}
 }
