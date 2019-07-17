@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Inventory))]
 public class Player : Entity
 {
 	private PlayerData playerData;
@@ -12,12 +13,10 @@ public class Player : Entity
 	public Slider healthBar;
 
 	public Slider staminaBar;
-	
 
 	public float speed = 10;
 
-	[Range(0f,1f)]
-	public float time = 1;
+	public Inventory Inventory { get { return GetComponent<Inventory>(); } }
 
 	// Start is called before the first frame update
 	void Start()
@@ -30,7 +29,6 @@ public class Player : Entity
 	// Update is called once per frame
 	protected override void OnUpdate()
 	{
-		Time.timeScale = time;
 		float x = Input.GetAxis("Horizontal");
 		float y = Input.GetAxis("Vertical");
 		Vector2 vector = new Vector2(x, y);
