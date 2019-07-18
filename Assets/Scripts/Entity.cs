@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public abstract class Entity : MonoBehaviour
+public class Entity : MonoBehaviour
 {
 	[SerializeField]
 	protected CharacterData character;
@@ -98,7 +98,7 @@ public abstract class Entity : MonoBehaviour
 		OnUpdate();
 	}
 
-	protected abstract void OnUpdate();
+	protected virtual void OnUpdate() { }
 
 	/// <summary>
 	/// Called when this entity is killed
