@@ -6,24 +6,13 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Inventory))]
 public class Player : Entity
 {
-	private PlayerData playerData;
-
-	public ItemData item;
-
-	public Slider healthBar;
-
-	public Slider staminaBar;
 
 	public float speed = 10;
-
-	public Inventory Inventory { get { return GetComponent<Inventory>(); } }
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		playerData = character as PlayerData;
-		transform.position = Zone.Current.playerSpawnLocation;
-		Debug.Log(health.Max);
+
 	}
 
 	// Update is called once per frame

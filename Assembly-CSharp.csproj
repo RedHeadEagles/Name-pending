@@ -79,9 +79,13 @@
     <Compile Include="Assets\Game Data\StatsData.cs" />
     <Compile Include="Assets\Scripts\AI\AI.cs" />
     <Compile Include="Assets\Scripts\Camera.cs" />
-    <Compile Include="Assets\Scripts\Enemies\Boss.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bug.cs" />
-    <Compile Include="Assets\Scripts\Entity.cs" />
+    <Compile Include="Assets\Scripts\Entities\Boss.cs" />
+    <Compile Include="Assets\Scripts\Entities\Entity.cs" />
+    <Compile Include="Assets\Scripts\Entities\Health.cs" />
+    <Compile Include="Assets\Scripts\Entities\Player.cs" />
+    <Compile Include="Assets\Scripts\Entities\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Entities\Stamina.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\IInteractable.cs" />
     <Compile Include="Assets\Scripts\IO\IO.cs" />
@@ -101,11 +105,13 @@
     <Compile Include="Assets\Scripts\Path Finding\Mesh2D.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Point.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Vertex.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\Stat.cs" />
     <Compile Include="Assets\Scripts\Stats.cs" />
     <Compile Include="Assets\Scripts\Terrain.cs" />
+    <Compile Include="Assets\Scripts\Triggers\Trigger.cs" />
+    <Compile Include="Assets\Scripts\Triggers\TriggerTargets.cs" />
+    <Compile Include="Assets\Scripts\Triggers\ZoneLeaveTrigger.cs" />
     <Compile Include="Assets\Scripts\Zone.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/GitProjects/Project-Kominis/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

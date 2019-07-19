@@ -67,9 +67,9 @@ public class Bug : Entity
 					moveLock -= Time.deltaTime;
 					break;
 				}
-				else if (DistanceToPlayer < attackRange)
+				else if (DistanceTo(GameManager.Player) < attackRange)
 					state = State.Attack;
-				else if (DistanceToPlayer > aggroRange)
+				else if (DistanceTo(GameManager.Player) > aggroRange)
 					state = State.Return;
 				else
 					MoveToward(GameManager.Player, speedChase);
@@ -86,7 +86,7 @@ public class Bug : Entity
 
 				MoveToward(wanderLocation, speedWander);
 
-				if (DistanceToPlayer < aggroRange)
+				if (DistanceTo(GameManager.Player) < aggroRange)
 				{
 					nextAttack = 0.5f;
 					state = State.Chase;
@@ -97,7 +97,7 @@ public class Bug : Entity
 			case State.Attack:
 				nextAttack -= Time.deltaTime;
 
-				if (DistanceToPlayer > attackRange)
+				if (DistanceTo(GameManager.Player) > attackRange)
 					state = State.Chase;
 
 				if (nextAttack <= 0)
@@ -106,7 +106,7 @@ public class Bug : Entity
 					moveLock = 0.25f;
 				}
 
-				Body.velocity = Vector2.zero;
+				rigidBody.velocity = Vector2.zero;
 				break;
 
 			case State.Return:
