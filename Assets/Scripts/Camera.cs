@@ -17,7 +17,7 @@ public class Camera : MonoBehaviour
 		{
 
 			Vector3 end = tracked.transform.position + offset;
-			transform.position = Vector3.Lerp(transform.position, end, trackSpeed * Time.smoothDeltaTime);
+			transform.position = Vector3.Lerp(transform.position, end, trackSpeed * Time.unscaledDeltaTime);
 		}
 	}
 }

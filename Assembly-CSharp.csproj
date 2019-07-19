@@ -60,27 +60,38 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ScriptableObjects\Armor.cs" />
-    <Compile Include="Assets\ScriptableObjects\Buff.cs" />
-    <Compile Include="Assets\ScriptableObjects\Debuff.cs" />
-    <Compile Include="Assets\ScriptableObjects\EntityObject.cs" />
-    <Compile Include="Assets\ScriptableObjects\Equipment.cs" />
-    <Compile Include="Assets\ScriptableObjects\Gold.cs" />
-    <Compile Include="Assets\ScriptableObjects\Item.cs" />
-    <Compile Include="Assets\ScriptableObjects\Loot.cs" />
-    <Compile Include="Assets\ScriptableObjects\NPC.cs" />
-    <Compile Include="Assets\ScriptableObjects\Player.cs" />
-    <Compile Include="Assets\ScriptableObjects\Special.cs" />
-    <Compile Include="Assets\ScriptableObjects\StatusEffect.cs" />
-    <Compile Include="Assets\ScriptableObjects\Trinket.cs" />
-    <Compile Include="Assets\ScriptableObjects\Weapon.cs" />
-    <Compile Include="Assets\Scripts\Attack.cs" />
+    <Compile Include="Assets\Game Data\Attacks\Attack.cs" />
+    <Compile Include="Assets\Game Data\Characters\CharacterData.cs" />
+    <Compile Include="Assets\Game Data\Containers\ContainerData.cs" />
+    <Compile Include="Assets\Game Data\Effects\Buffs\BuffData.cs" />
+    <Compile Include="Assets\Game Data\Effects\Debuffs\DebuffData.cs" />
+    <Compile Include="Assets\Game Data\Effects\EffectData.cs" />
+    <Compile Include="Assets\Game Data\Items\Equipment\Armor\ArmorData.cs" />
+    <Compile Include="Assets\Game Data\Items\Equipment\Backpacks\BackpackData.cs" />
+    <Compile Include="Assets\Game Data\Items\Equipment\EquipmentData.cs" />
+    <Compile Include="Assets\Game Data\Items\Equipment\Special\SpecialData.cs" />
+    <Compile Include="Assets\Game Data\Items\Equipment\Trinkets\TrinketData.cs" />
+    <Compile Include="Assets\Game Data\Items\Equipment\Weapons\Weapon.cs" />
+    <Compile Include="Assets\Game Data\Items\ItemData.cs" />
+    <Compile Include="Assets\Game Data\LootTable.cs" />
+    <Compile Include="Assets\Game Data\NPC.cs" />
+    <Compile Include="Assets\Game Data\PlayerData.cs" />
+    <Compile Include="Assets\Game Data\StatsData.cs" />
+    <Compile Include="Assets\Scripts\AI\AI.cs" />
     <Compile Include="Assets\Scripts\Camera.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bug.cs" />
     <Compile Include="Assets\Scripts\Entity.cs" />
-    <Compile Include="Assets\Scripts\EquipmentSlot.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\IInteractable.cs" />
+    <Compile Include="Assets\Scripts\IO\IO.cs" />
+    <Compile Include="Assets\Scripts\IO\Path.cs" />
+    <Compile Include="Assets\Scripts\IO\PathSegment.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Inventory\InventoryUI.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Slot.cs" />
+    <Compile Include="Assets\Scripts\Inventory\SlotUI.cs" />
+    <Compile Include="Assets\Scripts\LootContainer.cs" />
     <Compile Include="Assets\Scripts\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Object Pool\IPoolSpawner.cs" />
     <Compile Include="Assets\Scripts\Object Pool\ObjectPool.cs" />
@@ -90,47 +101,47 @@
     <Compile Include="Assets\Scripts\Path Finding\Mesh2D.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Point.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Vertex.cs" />
-    <Compile Include="Assets\Scripts\PlayerCharacter.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
-    <Compile Include="Assets\Scripts\Stats\Health.cs" />
-    <Compile Include="Assets\Scripts\Stats\Stamina.cs" />
-    <Compile Include="Assets\Scripts\Stats\Stat.cs" />
+    <Compile Include="Assets\Scripts\Stat.cs" />
+    <Compile Include="Assets\Scripts\Stats.cs" />
     <Compile Include="Assets\Scripts\Terrain.cs" />
+    <Compile Include="Assets\Scripts\Zone.cs" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Project-Kominis/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/GitProjects/Project-Kominis/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Project-Kominis/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/GitProjects/Project-Kominis/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Project-Kominis/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/GitProjects/Project-Kominis/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Resilio/Sync/Projects/Project-Kominis/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/GitProjects/Project-Kominis/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Resilio/Sync/Projects/Project-Kominis/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/GitProjects/Project-Kominis/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Project-Kominis/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/GitProjects/Project-Kominis/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Project-Kominis/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/GitProjects/Project-Kominis/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Project-Kominis/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>C:/GitProjects/Project-Kominis/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Project-Kominis/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>C:/GitProjects/Project-Kominis/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>C:/Resilio/Sync/Projects/Project-Kominis/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+      <HintPath>C:/GitProjects/Project-Kominis/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Resilio/Sync/Projects/Project-Kominis/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/GitProjects/Project-Kominis/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Resilio/Sync/Projects/Project-Kominis/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/GitProjects/Project-Kominis/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.0a8/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

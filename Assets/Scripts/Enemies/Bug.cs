@@ -103,7 +103,6 @@ public class Bug : Entity
 				if (nextAttack <= 0)
 				{
 					nextAttack = attackTime;
-					GameManager.Player.health.ApplyDamage(attackDamage);
 					moveLock = 0.25f;
 				}
 

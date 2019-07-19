@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-	private PlayerCharacter player;
+	private Player player;
 
 	/// <summary>
 	/// Provides qick access to the player entity
 	/// </summary>
-	public static PlayerCharacter Player
+	public static Player Player
 	{
 		get
 		{
 			if (Instance.player == null)
-				Instance.player = FindObjectOfType<PlayerCharacter>();
+				Instance.player = FindObjectOfType<Player>();
 
 			return Instance.player;
 		}
