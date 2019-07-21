@@ -6,22 +6,15 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Inventory))]
 public class Player : Entity
 {
-
-	public float speed = 10;
-
-	// Start is called before the first frame update
-	void Start()
-	{
-
-	}
-
 	// Update is called once per frame
-	protected override void OnUpdate()
+	protected override void Update()
 	{
+		base.Update();
+
 		float x = Input.GetAxis("Horizontal");
 		float y = Input.GetAxis("Vertical");
 		Vector2 vector = new Vector2(x, y);
-		Move(vector, speed);
+		Move(vector, stats.speed.Value);
 	}
 
 	protected override void OnDeath()

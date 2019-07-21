@@ -6,18 +6,26 @@ public class Entity : MonoBehaviour
 	/// <summary>
 	/// Gets this entity's inventory, if it has one
 	/// </summary>
-	public Inventory inventory { get { return GetComponent<Inventory>(); } }
+	public Inventory inventory;
 
 	/// <summary>
 	/// Gets the AI script this entity is using, if it has one
 	/// </summary>
-	public AI ai { get { return GetComponent<AI>(); } }
+	public AI ai;
 
-	public Rigidbody2D rigidBody { get { return GetComponent<Rigidbody2D>(); } }
+	public Rigidbody2D rigidBody;
 
-	public Health health = new Health();
+	public Stats stats = new Stats();
 
-	public Stamina stamina = new Stamina();
+	/// <summary>
+	/// Provides quick access to the health stat
+	/// </summary>
+	public Health Health { get { return stats.health; } }
+
+	/// <summary>
+	/// Provides quick access to the stamina stat
+	/// </summary>
+	public Stamina Stamina { get { return stats.stamina; } }
 
 	/// <summary>
 	/// Is this entity currently considered dead
@@ -27,37 +35,52 @@ public class Entity : MonoBehaviour
 	/// <summary>
 	/// Is this entity currently considered to be alive
 	/// </summary>
-	public virtual bool IsAlive { get { return health.Current > 0; } }
+	public virtual bool IsAlive { get { return stats.health.Current > 0; } }
 
-	// Start is called before the first frame update
-	void Awake()
+	/// <summary>
+	/// Gets called whenever this script either gets added to a GameObject or Reset in the editor
+	/// </summary>
+	private void Reset()
 	{
+		inventory = GetComponent<Inventory>();
+
+		rigidBody = GetComponent<Rigidbody2D>();
 		rigidBody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 		rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+		ai = GetComponent<AI>();
 	}
 
-	// Update is called once per frame
-	void Update()
+	protected virtual void Start()
 	{
+		OnSpawn();
+	}
 
-		if (false)
+	public virtual void OnSpawn()
+	{
+		Health.Reset();
+		Stamina.Reset();
+	}
+	
+	protected virtual void Update()
+	{
+		if(IsDead)
 		{
-			gameObject.SetActive(false);
 			OnDeath();
 			return;
 		}
 
-		//health.DoRegen(Time.deltaTime);
-
-		OnUpdate();
+		Stamina.DoRegen(Time.deltaTime);
 	}
-
-	protected virtual void OnUpdate() { }
 
 	/// <summary>
 	/// Called when this entity is killed
 	/// </summary>
-	protected virtual void OnDeath() { }
+	protected virtual void OnDeath()
+	{
+		Debug.Log(gameObject.name + " has died!");
+		gameObject.SetActive(false);
+	}
 
 	public void MoveToward(Entity entity, float speed)
 	{
@@ -88,6 +111,6 @@ public class Entity : MonoBehaviour
 	public void ApplyDamage(float amount)
 	{
 		Debug.Log(string.Format("{0} took {1} damage!", name, amount));
-		health.Current -= amount;
+		stats.health.Current -= amount;
 	}
 }

@@ -117,10 +117,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ccbd9b4abae1d4a9a7ad9743483260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health:
-    max: 100
-    current: 100
-    regen: 1
+  inventory: {fileID: 0}
+  ai: {fileID: 0}
+  rigidBody: {fileID: 3181941892310650645}
+  stats:
+    health:
+      levelMultiplier: 0.05
+      baseValue: 100
+      invulnerable: 0
+    stamina:
+      levelMultiplier: 0.05
+      baseValue: 100
+      regenPercentage: 0.01
+    speed:
+      levelMultiplier: 0.05
+      baseValue: 0
+    walkSpeedModifier: 0.25
+    defense:
+      levelMultiplier: 0.05
+      baseValue: 1
+    attack:
+      levelMultiplier: 0.05
+      baseValue: 1
   wanderRange: 5
   speedChase: 10
   speedWander: 3

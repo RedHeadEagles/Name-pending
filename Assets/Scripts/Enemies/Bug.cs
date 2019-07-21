@@ -44,15 +44,17 @@ public class Bug : Entity
 
 	private State state = State.Wander;
 
-	// Start is called before the first frame update
-	void Start()
+	protected override void Start()
 	{
+		base.Start();
 		home = transform.position;
 	}
 
 	// Update is called once per frame
-	protected override void OnUpdate()
+	protected override void Update()
 	{
+		base.Update();
+
 		// Return home if we have strayed to far from our spawn location
 		if (DistanceTo(home) > 30)
 			state = State.Return;
@@ -104,6 +106,7 @@ public class Bug : Entity
 				{
 					nextAttack = attackTime;
 					moveLock = 0.25f;
+					target.ApplyDamage(attackDamage);
 				}
 
 				rigidBody.velocity = Vector2.zero;
