@@ -8,12 +8,7 @@ public class Stats
 
 	public Stamina stamina = new Stamina(0.05f);
 
-	public Stat speed = new Stat(0.05f);
-
-	[Range(0f, 1f)]
-	public float walkSpeedModifier = 0.25f;
-
-	public float WalkSpeed { get { return speed.Value * walkSpeedModifier; } }
+	public Speed speed = new Speed(0.05f);
 
 	public Stat defense = new Stat(0.05f);
 

@@ -83,11 +83,11 @@
     <Compile Include="Assets\Scripts\Entities\Aggression.cs" />
     <Compile Include="Assets\Scripts\Entities\Boss.cs" />
     <Compile Include="Assets\Scripts\Entities\Entity.cs" />
-    <Compile Include="Assets\Scripts\Entities\NPC.cs" />
     <Compile Include="Assets\Scripts\Entities\Player.cs" />
     <Compile Include="Assets\Scripts\Entities\Projectile.cs" />
     <Compile Include="Assets\Scripts\Entities\Stats\EntityResource.cs" />
     <Compile Include="Assets\Scripts\Entities\Stats\Health.cs" />
+    <Compile Include="Assets\Scripts\Entities\Stats\Speed.cs" />
     <Compile Include="Assets\Scripts\Entities\Stats\Stamina.cs" />
     <Compile Include="Assets\Scripts\Entities\Stats\Stat.cs" />
     <Compile Include="Assets\Scripts\Entities\Stats\Stats.cs" />
@@ -115,7 +115,9 @@
     <Compile Include="Assets\Scripts\Triggers\Trigger.cs" />
     <Compile Include="Assets\Scripts\Triggers\TriggerTargets.cs" />
     <Compile Include="Assets\Scripts\Triggers\ZoneLeaveTrigger.cs" />
+    <Compile Include="Assets\Scripts\Vision.cs" />
     <Compile Include="Assets\Scripts\Zone.cs" />
+    <Compile Include="Assets\test.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/GitProjects/Project-Kominis/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

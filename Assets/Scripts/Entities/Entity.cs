@@ -47,6 +47,7 @@ public class Entity : MonoBehaviour
 		rigidBody = GetComponent<Rigidbody2D>();
 		rigidBody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 		rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+		rigidBody.drag = 10;
 
 		ai = GetComponent<AI>();
 	}
@@ -82,20 +83,31 @@ public class Entity : MonoBehaviour
 		gameObject.SetActive(false);
 	}
 
-	public void MoveToward(Entity entity, float speed)
+	/// <summary>
+	/// Performs a dodge roll in the given direction
+	/// </summary>
+	/// <param name="direction"></param>
+	public void Dash(Vector2 direction)
 	{
-		MoveToward(entity.transform.position, speed);
+		rigidBody.AddForce(direction * stats.speed.Dash, ForceMode2D.Impulse);
 	}
 
-	public void MoveToward(Vector3 location, float speed)
+	/// <summary>
+	/// Tells the entity to move in the given direction
+	/// </summary>
+	/// <param name="direction"></param>
+	public void Move(Vector2 direction, float speedMod = 1)
 	{
-		Vector2 vector = location - transform.position;
-		Move(vector.normalized, speed);
+		rigidBody.AddForce(direction * stats.speed.Value * Time.deltaTime * speedMod, ForceMode2D.Impulse);
 	}
 
-	public void Move(Vector3 vector, float speed)
+	/// <summary>
+	/// Tells the entity to move to the target location, will use pathfinding
+	/// </summary>
+	/// <param name="location"></param>
+	public void MoveTo(Vector2 location, float speedMod = 1)
 	{
-		rigidBody.velocity = vector * speed;
+
 	}
 
 	public float DistanceTo(Entity entity)

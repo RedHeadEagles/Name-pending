@@ -14,7 +14,10 @@ public class Player : Entity
 		float x = Input.GetAxis("Horizontal");
 		float y = Input.GetAxis("Vertical");
 		Vector2 vector = new Vector2(x, y);
-		Move(vector, stats.speed.Value);
+		Move(vector);
+
+		if (Input.GetKeyDown(KeyCode.R))
+			Dash(vector.normalized);
 	}
 
 	protected override void OnDeath()

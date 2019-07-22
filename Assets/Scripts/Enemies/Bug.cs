@@ -74,7 +74,7 @@ public class Bug : Entity
 				else if (DistanceTo(GameManager.Player) > aggroRange)
 					state = State.Return;
 				else
-					MoveToward(GameManager.Player, speedChase);
+					MoveTo(GameManager.Player.transform.position);
 				break;
 
 			case State.Wander:
@@ -86,7 +86,7 @@ public class Bug : Entity
 					wanderLocation = Random.insideUnitCircle * wanderRange + home;
 				}
 
-				MoveToward(wanderLocation, speedWander);
+				MoveTo(wanderLocation);
 
 				if (DistanceTo(GameManager.Player) < aggroRange)
 				{
@@ -113,7 +113,7 @@ public class Bug : Entity
 				break;
 
 			case State.Return:
-				MoveToward(home, speedChase);
+				MoveTo(home);
 				if (DistanceTo(home) < 1)
 					state = State.Wander;
 				break;

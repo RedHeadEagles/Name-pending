@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 069d354c7591dec4bac29e89c9b24a35, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  name: 
+  name: Player
+  prefab: {fileID: 0}
   baseHealth: 100
   baseEnergy: 100
   baseEnergyRegen: 0.01
   baseSpeed: 1
+  baseDefense: 0
   stats:
     health: 0
     energy: 0
@@ -25,7 +27,6 @@ MonoBehaviour:
     defense: 0
     speed: 0
   walkSpeed: 0.25
-  walkAnimation: {fileID: 0}
   startArmor: {fileID: 0}
   startWeapon: {fileID: 0}
   startTrinket: {fileID: 0}
