@@ -5,6 +5,8 @@ public class CharacterData : ScriptableObject
 {
 	public new string name;
 
+	public GameObject prefab;
+
 	[Header("General Stats")]
 	public float baseHealth = 100;
 
@@ -22,7 +24,4 @@ public class CharacterData : ScriptableObject
 	[Range(0f, 1f)]
 	[Tooltip("Percentage of movement speed to use when walking")]
 	public float walkSpeed = 0.25f;
-
-	[Header("Animations")]
-	public AnimationClip walkAnimation;
 }
