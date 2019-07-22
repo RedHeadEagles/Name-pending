@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class NPC : CharacterData
+public class NPCData : CharacterData
 {
 	[Range(0, 1f)]
 	[Tooltip("Percentage of movement speed to use when idle/wandering")]

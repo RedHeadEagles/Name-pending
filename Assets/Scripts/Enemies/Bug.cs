@@ -44,15 +44,17 @@ public class Bug : Entity
 
 	private State state = State.Wander;
 
-	// Start is called before the first frame update
-	void Start()
+	protected override void Start()
 	{
+		base.Start();
 		home = transform.position;
 	}
 
 	// Update is called once per frame
-	protected override void OnUpdate()
+	protected override void Update()
 	{
+		base.Update();
+
 		// Return home if we have strayed to far from our spawn location
 		if (DistanceTo(home) > 30)
 			state = State.Return;
@@ -67,12 +69,12 @@ public class Bug : Entity
 					moveLock -= Time.deltaTime;
 					break;
 				}
-				else if (DistanceToPlayer < attackRange)
+				else if (DistanceTo(GameManager.Player) < attackRange)
 					state = State.Attack;
-				else if (DistanceToPlayer > aggroRange)
+				else if (DistanceTo(GameManager.Player) > aggroRange)
 					state = State.Return;
 				else
-					MoveToward(GameManager.Player, speedChase);
+					MoveTo(GameManager.Player.transform.position);
 				break;
 
 			case State.Wander:
@@ -84,9 +86,9 @@ public class Bug : Entity
 					wanderLocation = Random.insideUnitCircle * wanderRange + home;
 				}
 
-				MoveToward(wanderLocation, speedWander);
+				MoveTo(wanderLocation);
 
-				if (DistanceToPlayer < aggroRange)
+				if (DistanceTo(GameManager.Player) < aggroRange)
 				{
 					nextAttack = 0.5f;
 					state = State.Chase;
@@ -97,20 +99,21 @@ public class Bug : Entity
 			case State.Attack:
 				nextAttack -= Time.deltaTime;
 
-				if (DistanceToPlayer > attackRange)
+				if (DistanceTo(GameManager.Player) > attackRange)
 					state = State.Chase;
 
 				if (nextAttack <= 0)
 				{
 					nextAttack = attackTime;
 					moveLock = 0.25f;
+					target.ApplyDamage(attackDamage);
 				}
 
-				Body.velocity = Vector2.zero;
+				rigidBody.velocity = Vector2.zero;
 				break;
 
 			case State.Return:
-				MoveToward(home, speedChase);
+				MoveTo(home);
 				if (DistanceTo(home) < 1)
 					state = State.Wander;
 				break;
