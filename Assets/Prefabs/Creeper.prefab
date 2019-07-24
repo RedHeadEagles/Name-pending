@@ -145,14 +145,14 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 10
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &3181941892310650644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
       regenPercentage: 0.01
     speed:
       levelMultiplier: 0.05
-      baseValue: 0
+      baseValue: 90
       walkModifier: 0.25
       dashModifier: 10
       dashEnergyCost: 20
@@ -189,6 +189,7 @@ MonoBehaviour:
     attack:
       levelMultiplier: 0.05
       baseValue: 1
+  waypointDistance: 0.25
   wanderRange: 5
   speedChase: 10
   speedWander: 3

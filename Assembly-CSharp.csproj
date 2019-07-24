@@ -78,7 +78,6 @@
     <Compile Include="Assets\Game Data\PlayerData.cs" />
     <Compile Include="Assets\Game Data\StatsData.cs" />
     <Compile Include="Assets\Scripts\AI\AI.cs" />
-    <Compile Include="Assets\Scripts\Camera.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bug.cs" />
     <Compile Include="Assets\Scripts\Entities\Aggression.cs" />
     <Compile Include="Assets\Scripts\Entities\Boss.cs" />
@@ -91,6 +90,7 @@
     <Compile Include="Assets\Scripts\Entities\Stats\Stamina.cs" />
     <Compile Include="Assets\Scripts\Entities\Stats\Stat.cs" />
     <Compile Include="Assets\Scripts\Entities\Stats\Stats.cs" />
+    <Compile Include="Assets\Scripts\GameCamera.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\IInteractable.cs" />
     <Compile Include="Assets\Scripts\IO\IO.cs" />
@@ -107,7 +107,8 @@
     <Compile Include="Assets\Scripts\Object Pool\Pool.cs" />
     <Compile Include="Assets\Scripts\Object Pool\RegistarItem.cs" />
     <Compile Include="Assets\Scripts\Path Finding\AStar.cs" />
-    <Compile Include="Assets\Scripts\Path Finding\Mesh2D.cs" />
+    <Compile Include="Assets\Scripts\Path Finding\IPathAgent.cs" />
+    <Compile Include="Assets\Scripts\Path Finding\NavigationMesh.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Point.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Vertex.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />

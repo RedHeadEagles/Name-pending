@@ -1,58 +1,151 @@
-﻿using System.Collections;
+﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
+using System.Threading;
 
-public static class AStar
+public class AStar : MonoSingleton<AStar>
 {
-	private static float EstiamteCost(Vertex start, Vertex end)
+	public static NavigationMesh Mesh { get; private set; }
+
+	public Queue<Thread> pathRequests = new Queue<Thread>();
+
+	private void Update()
 	{
-		return Vector2Int.Distance(start.location, end.location);
+		if (pathRequests.Count > 0)
+		{
+			var path = pathRequests.Dequeue();
+			path.Start();
+		}
 	}
 
-	private static List<Vector2> BuildPath(Mesh2D mesh, Dictionary<Vertex, Vertex> cameFrom, Vertex start, Vertex end)
+	protected override void OnFirstRun()
 	{
-		var path = new List<Vector2>();
+		Mesh = GetComponent<NavigationMesh>();
+	}
 
-		while (end != start)
+	private static List<Vector3> ReducePath(List<Vector3> path)
+	{
+		for (int i = 1; i < path.Count - 1; i++)
 		{
-			path.Insert(0, mesh.ToWorldGrid(end.location));
-			end = cameFrom[end];
+			var a = path[i - 1];
+			var b = path[i];
+
+			if (a.x == b.x || a.y == b.y)
+			{
+				path.RemoveAt(i - 1);
+				i--;
+			}
 		}
 
 		return path;
 	}
 
-	public static List<Vector2> FindPath(Mesh2D mesh, Vector2 startLocation, Vector2 endLocation)
+	private static List<Vector3> BuildPath(Dictionary<Point, Vertex> cameFrom, Vertex end)
 	{
-		var start = mesh.GetClosestVertex(startLocation);
-		var end = mesh.GetClosestVertex(endLocation);
+		var path = new List<Vector3>();
 
-		if (start == null || end == null)
-			return null;
+		while (end != null)
+		{
+			path.Insert(0, end.worldLocation);
+			end = cameFrom[end.location];
+		}
 
-		var open = new List<Vertex> { start };
-		var closed = new List<Vertex>();
-		var cameFrom = new Dictionary<Vertex, Vertex>();
-		var gScore = new Dictionary<Vertex, float>();
-		var fScore = new Dictionary<Vertex, float>();
+		return path;
+	}
 
-		gScore[start] = 0;
-		fScore[start] = EstiamteCost(start, end);
+	private static float Estimate(Point a, Point b)
+	{
+		return Mathf.Abs(b.x - a.x) + Mathf.Abs(b.y - a.y);
+	}
+
+	private static float Score(Dictionary<Point, float> scores, Point key)
+	{
+		if (scores.TryGetValue(key, out float score))
+			return score;
+
+		return float.MaxValue;
+	}
+
+	public static void FindPath(IPathAgent agent, Vector3 endLocation)
+	{
+		var dir = endLocation - agent.transform.position;
+		var hit = Physics2D.Raycast(agent.transform.position, dir, dir.magnitude, Mesh.terrainLayer);
+
+		if (hit.collider == null)
+		{
+			agent.OnPathFound(new List<Vector3>() { endLocation });
+			return;
+		}
+
+		var start = Mesh[agent.transform.position];
+		var end = Mesh[endLocation];
+
+		var thread = new Thread(new ThreadStart(() => PathThread(agent, start, end)));
+		Instance.pathRequests.Enqueue(thread);
+	}
+
+	public static List<Vector3> FindPath(Vector3 startLocation, Vector3 endLocation)
+	{
+		var dir = endLocation - startLocation;
+		var hit = Physics2D.Raycast(startLocation, dir, dir.magnitude, Mesh.terrainLayer);
+
+		if (hit.collider == null)
+			return new List<Vector3>() { endLocation };
+
+		var start = Mesh[startLocation];
+		var end = Mesh[endLocation];
+
+		return FindPath(start, end);
+	}
+
+	private static List<Vector3> FindPath(Vertex start, Vertex end)
+	{
+		var open = new List<Point>() { start.location };
+		var cameFrom = new Dictionary<Point, Vertex>();
+		var gScore = new Dictionary<Point, float>();
+		var fScore = new Dictionary<Point, float>();
+
+		cameFrom[start.location] = null;
+		gScore[start.location] = 0;
+		fScore[end.location] = 0;
 
 		while (open.Count > 0)
 		{
-			Vertex current = open[0];
+			open = open.OrderBy(f => Score(fScore, f)).ToList();
+			var current = open[0];
 			open.RemoveAt(0);
 
-			if (current == end)
-				return BuildPath(mesh, cameFrom, start, end);
+			var currentV = Mesh[current.x, current.y];
 
-			foreach (var neighbor in current.connections)
+			if (current == end.location)
+				return BuildPath(cameFrom, currentV);
+
+			foreach (var neighbor in currentV)
 			{
-				//var score = gScore[current] + EstiamteCost(current, neighbor);
+				var score = Score(gScore, current) + Estimate(current, neighbor);
+
+				if (score < Score(gScore, neighbor))
+				{
+					cameFrom[neighbor] = currentV;
+					gScore[neighbor] = score;
+					fScore[neighbor] = Score(gScore, neighbor) + 1;
+
+					if (!open.Contains(neighbor))
+						open.Insert(0, neighbor);
+				}
 			}
 		}
 
-		return null;
+		return new List<Vector3>();
+	}
+
+	private static void PathThread(IPathAgent agent, Vertex start, Vertex end)
+	{
+		var path = FindPath(start, end);
+
+		if (path.Count == 0)
+			agent.OnPathFailed();
+		else
+			agent.OnPathFound(path);
 	}
 }

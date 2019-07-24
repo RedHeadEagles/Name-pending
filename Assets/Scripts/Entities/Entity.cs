@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Entity : MonoBehaviour
+public class Entity : MonoBehaviour, IPathAgent
 {
 	/// <summary>
 	/// Gets this entity's inventory, if it has one
@@ -37,6 +38,19 @@ public class Entity : MonoBehaviour
 	/// </summary>
 	public virtual bool IsAlive { get { return stats.health.Current > 0; } }
 
+	private List<Vector3> path = new List<Vector3>();
+
+	public bool PathFinding { get; private set; }
+
+	[Range(float.Epsilon, 10f)]
+	public float waypointDistance = 0.25f;
+
+	private float nextPathFind = 0;
+
+	private System.DateTime lastPathStart;
+
+	private float lastPathTime;
+
 	/// <summary>
 	/// Gets called whenever this script either gets added to a GameObject or Reset in the editor
 	/// </summary>
@@ -70,6 +84,8 @@ public class Entity : MonoBehaviour
 			OnDeath();
 			return;
 		}
+
+		nextPathFind -= Time.deltaTime;
 
 		Stamina.DoRegen(Time.deltaTime);
 	}
@@ -107,7 +123,22 @@ public class Entity : MonoBehaviour
 	/// <param name="location"></param>
 	public void MoveTo(Vector2 location, float speedMod = 1)
 	{
+		if (!PathFinding && nextPathFind <= 0 || nextPathFind < -10 || path.Count == 0 && !PathFinding)
+		{
+			lastPathStart = System.DateTime.Now;
+			nextPathFind = lastPathTime * 100;
+			PathFinding = true;
+			AStar.FindPath(this, location);
+		}
 
+		if (path.Count > 0)
+		{
+			var dir = path[0] - transform.position;
+			Move(dir.normalized, speedMod);
+
+			if (Vector3.Distance(path[0], transform.position) < waypointDistance)
+				path.RemoveAt(0);
+		}
 	}
 
 	public float DistanceTo(Entity entity)
@@ -124,5 +155,34 @@ public class Entity : MonoBehaviour
 	{
 		Debug.Log(string.Format("{0} took {1} damage!", name, amount));
 		stats.health.Current -= amount;
+	}
+
+	public void OnPathFound(List<Vector3> path)
+	{
+		lastPathTime = (float)(System.DateTime.Now - lastPathStart).TotalSeconds;
+		this.path = path;
+
+		PathFinding = false;
+	}
+
+	public virtual void OnPathFailed() { }
+
+	protected virtual void OnDrawGizmosSelected()
+	{
+		var color = Gizmos.color;
+
+		if(path.Count > 0)
+		{
+			Gizmos.color = Color.red;
+			Gizmos.DrawLine(transform.position, path[0]);
+
+			for (int i = 1; i < path.Count; i++)
+			{
+				Gizmos.DrawWireSphere(path[i], 0.25f);
+				Gizmos.DrawLine(path[i - 1], path[i]);
+			}
+		}
+
+		Gizmos.color = color;
 	}
 }
