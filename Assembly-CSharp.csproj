@@ -77,10 +77,10 @@
     <Compile Include="Assets\ScriptableObjects\Stats.cs" />
     <Compile Include="Assets\ScriptableObjects\StatusEffect.cs" />
     <Compile Include="Assets\Scripts\Attack.cs" />
-    <Compile Include="Assets\Scripts\Camera.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bug.cs" />
     <Compile Include="Assets\Scripts\Entity.cs" />
+    <Compile Include="Assets\Scripts\GameCamera.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Object Pool\IPoolSpawner.cs" />
@@ -88,8 +88,8 @@
     <Compile Include="Assets\Scripts\Object Pool\Pool.cs" />
     <Compile Include="Assets\Scripts\Object Pool\RegistarItem.cs" />
     <Compile Include="Assets\Scripts\Path Finding\AStar.cs" />
-    <Compile Include="Assets\Scripts\Path Finding\IHeapItem.cs" />
-    <Compile Include="Assets\Scripts\Path Finding\Mesh2D.cs" />
+    <Compile Include="Assets\Scripts\Path Finding\IPathAgent.cs" />
+    <Compile Include="Assets\Scripts\Path Finding\NavigationMesh.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Point.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Vertex.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter.cs" />

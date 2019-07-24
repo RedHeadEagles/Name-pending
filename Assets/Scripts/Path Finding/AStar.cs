@@ -1,79 +1,119 @@
-﻿using System.Collections;
+﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using System.Threading;
 
-public class AStar
+public class AStar : MonoSingleton<AStar>
 {
-	private class Heap
+	public static NavigationMesh Mesh { get; private set; }
+
+	public Queue<Thread> pathRequests = new Queue<Thread>();
+
+	private void Update()
 	{
-		private List<Node> heap = new List<Node>();
-
-		public bool IsEmpty { get { return heap.Count == 0; } }
-
-		public void Insert(Node data)
+		if(pathRequests.Count>0)
 		{
-			heap.Insert(0, data);
-		}
-
-		public Node Pop()
-		{
-			if (IsEmpty)
-				return default;
-
-			heap = heap.OrderBy(i => i.fScore).ToList();
-			Node d = heap[0];
-			heap.RemoveAt(0);
-			return d;
+			var path = pathRequests.Dequeue();
+			path.Start();
 		}
 	}
 
-	private class Node
+	protected override void OnFirstRun()
 	{
-		public Vector2Int location;
+		Mesh = GetComponent<NavigationMesh>();
+	}
 
-		public float gScore = float.MaxValue;
+	private static List<Vector3> BuildPath(Dictionary<Point, Vertex> cameFrom, Vertex end)
+	{
+		var path = new List<Vector3>();
 
-		public float fScore = float.MaxValue;
-
-		public Node cameFrom;
-
-		public Node(Vector2Int location)
+		while(end!=null)
 		{
-			this.location = location;
+			path.Insert(0, end.worldLocation);
+			end = cameFrom[end.location];
 		}
+
+		return path;
 	}
 
-	private static float Cost(Vector2Int a, Vector2Int b)
+	private static float Estimate(Point a, Point b)
 	{
-		return Vector2Int.Distance(a, b);
+		return Mathf.Abs(b.x - a.x) + Mathf.Abs(b.y - a.y);
 	}
 
-	public static List<Vector2> FindPath(Mesh2D mesh, Vector2Int start, Vector2Int end)
+	private static float Score(Dictionary<Point, float> scores, Point key)
 	{
-		var map = new Node[mesh.width, mesh.height];
-		var open = new Heap();
+		if (scores.TryGetValue(key, out float score))
+			return score;
 
-		for (int x = 0; x < mesh.width; x++)
-			for (int y = 0; y < mesh.height; y++)
-				map[x, y] = new Node(new Vector2Int(x, y));
+		return float.MaxValue;
+	}
 
-		map[start.x, start.y].gScore = 0;
-		map[start.x, start.y].fScore = Cost(start, end);
+	public static void FindPath(IPathAgent agent, Vector2 endLocation)
+	{
+		var start = Mesh[agent.transform.position];
+		var end = Mesh[endLocation];
 
-		while(!open.IsEmpty)
+		var thread = new Thread(new ThreadStart(() => PathThread(agent, start, end)));
+		Instance.pathRequests.Enqueue(thread);
+	}
+
+	public static List<Vector3> FindPath(Vector2 startLocation, Vector2 endLocation)
+	{
+		var start = Mesh[startLocation];
+		var end = Mesh[endLocation];
+
+		return FindPath(start, end);
+	}
+	
+	private static List<Vector3> FindPath(Vertex start, Vertex end)
+	{
+		var open = new List<Point>() { start.location };
+		var cameFrom = new Dictionary<Point, Vertex>();
+		var gScore = new Dictionary<Point, float>();
+		var fScore = new Dictionary<Point, float>();
+
+		cameFrom[start.location] = null;
+		gScore[start.location] = 0;
+		fScore[end.location] = 0;
+
+		while (open.Count > 0)
 		{
-			var current = open.Pop();
-			if (current.location == end)
-				return null;
+			open = open.OrderBy(f => Score(fScore, f)).ToList();
+			var current = open[0];
+			open.RemoveAt(0);
 
-			var vertex = mesh[current.location.x, current.location.y];
-			foreach (var neighbor in vertex)
+			var currentV = Mesh[current.x, current.y];
+
+			if (current == end.location)
+				return BuildPath(cameFrom, currentV);
+
+			foreach (var neighbor in currentV)
 			{
+				var score = Score(gScore, current) + Estimate(current, neighbor);
 
+				if (score < Score(gScore, neighbor))
+				{
+					cameFrom[neighbor] = currentV;
+					gScore[neighbor] = score;
+					fScore[neighbor] = Score(gScore, neighbor) + 1;
+
+					if (!open.Contains(neighbor))
+						open.Insert(0, neighbor);
+				}
 			}
 		}
 
-		return null;
+		return new List<Vector3>();
+	}
+
+	private static void PathThread(IPathAgent agent, Vertex start, Vertex end)
+	{
+		var path = FindPath(start, end);
+
+		if (path.Count == 0)
+			agent.OnPathFailed();
+		else
+			agent.OnPathFound(path);
 	}
 }

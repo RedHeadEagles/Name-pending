@@ -15,7 +15,6 @@ public class GameCamera : MonoBehaviour
 	{
 		if (tracked != null)
 		{
-
 			Vector3 end = tracked.transform.position + offset;
 			transform.position = Vector3.Lerp(transform.position, end, trackSpeed * Time.smoothDeltaTime);
 		}

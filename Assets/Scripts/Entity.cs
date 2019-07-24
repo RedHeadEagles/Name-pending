@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public abstract class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour, IPathAgent
 {
 	public Health health = new Health(100);
 
@@ -29,6 +29,12 @@ public abstract class Entity : MonoBehaviour
 
 	public bool IsNotDead { get { return health.Current > 0; } }
 
+	private bool pathfinding = false;
+
+	public List<Vector3> path = new List<Vector3>();
+
+	private float nextPathRequest = 0;
+
 	// Start is called before the first frame update
 	void Awake()
 	{
@@ -48,7 +54,14 @@ public abstract class Entity : MonoBehaviour
 			return;
 		}
 
+		if(path.Count>0)
+		{
+			var dir = path[0] - transform.position;
+		}
+
 		health.DoRegen(Time.deltaTime);
+
+		nextPathRequest -= Time.deltaTime;
 
 		OnUpdate();
 	}
@@ -67,8 +80,11 @@ public abstract class Entity : MonoBehaviour
 
 	public void MoveToward(Vector3 location, float speed)
 	{
-		Vector2 vector = location - transform.position;
-		Move(vector.normalized, speed);
+		if (nextPathRequest <= 0)
+		{
+			nextPathRequest = 0.5f;
+			AStar.FindPath(this, location);
+		}
 	}
 
 	public void Move(Vector2 vector, float speed)
@@ -85,4 +101,11 @@ public abstract class Entity : MonoBehaviour
 	{
 		return Vector2.Distance(transform.position, location);
 	}
+
+	public void OnPathFound(List<Vector3> path)
+	{
+		this.path = path;
+	}
+
+	public virtual void OnPathFailed() { }
 }
