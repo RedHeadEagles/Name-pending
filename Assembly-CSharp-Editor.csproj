@@ -60,7 +60,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Items\Backpacks\Editor\SlotProperty.cs" />
     <Compile Include="Assets\Scripts\Object Pool\Editor\RegistarItemPropertyDrawer.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Editor\NavMesh2DEditor.cs" />
     <Reference Include="UnityEditor.TestRunner">
