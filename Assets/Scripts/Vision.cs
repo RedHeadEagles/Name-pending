@@ -10,11 +10,6 @@ public class Vision : MonoBehaviour
 
     void Update()
 	{
-
-		foreach (var item in visable)
-		{
-			Debug.Log(item);
-		}
 		visable.Clear();
     }
 

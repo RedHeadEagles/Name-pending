@@ -11,7 +11,7 @@ public class AStar : MonoSingleton<AStar>
 
 	private void Update()
 	{
-		if(pathRequests.Count>0)
+		if (pathRequests.Count > 0)
 		{
 			var path = pathRequests.Dequeue();
 			path.Start();
@@ -23,11 +23,28 @@ public class AStar : MonoSingleton<AStar>
 		Mesh = GetComponent<NavigationMesh>();
 	}
 
+	private static List<Vector3> ReducePath(List<Vector3> path)
+	{
+		for (int i = 1; i < path.Count - 1; i++)
+		{
+			var a = path[i - 1];
+			var b = path[i];
+
+			if (a.x == b.x || a.y == b.y)
+			{
+				path.RemoveAt(i - 1);
+				i--;
+			}
+		}
+
+		return path;
+	}
+
 	private static List<Vector3> BuildPath(Dictionary<Point, Vertex> cameFrom, Vertex end)
 	{
 		var path = new List<Vector3>();
 
-		while(end!=null)
+		while (end != null)
 		{
 			path.Insert(0, end.worldLocation);
 			end = cameFrom[end.location];
@@ -49,8 +66,17 @@ public class AStar : MonoSingleton<AStar>
 		return float.MaxValue;
 	}
 
-	public static void FindPath(IPathAgent agent, Vector2 endLocation)
+	public static void FindPath(IPathAgent agent, Vector3 endLocation)
 	{
+		var dir = endLocation - agent.transform.position;
+		var hit = Physics2D.Raycast(agent.transform.position, dir, dir.magnitude, Mesh.terrainLayer);
+
+		if (hit.collider == null)
+		{
+			agent.OnPathFound(new List<Vector3>() { endLocation });
+			return;
+		}
+
 		var start = Mesh[agent.transform.position];
 		var end = Mesh[endLocation];
 
@@ -58,14 +84,20 @@ public class AStar : MonoSingleton<AStar>
 		Instance.pathRequests.Enqueue(thread);
 	}
 
-	public static List<Vector3> FindPath(Vector2 startLocation, Vector2 endLocation)
+	public static List<Vector3> FindPath(Vector3 startLocation, Vector3 endLocation)
 	{
+		var dir = endLocation - startLocation;
+		var hit = Physics2D.Raycast(startLocation, dir, dir.magnitude, Mesh.terrainLayer);
+
+		if (hit.collider == null)
+			return new List<Vector3>() { endLocation };
+
 		var start = Mesh[startLocation];
 		var end = Mesh[endLocation];
 
 		return FindPath(start, end);
 	}
-	
+
 	private static List<Vector3> FindPath(Vertex start, Vertex end)
 	{
 		var open = new List<Point>() { start.location };

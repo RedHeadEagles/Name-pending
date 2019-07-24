@@ -7,11 +7,11 @@ public class NavigationMesh : MonoBehaviour
 {
 	public Vertex[] vertices = new Vertex[0];
 
-	public Vector2 Min { get { return Collider.bounds.min; } }
+	public Vector3 Min { get { return Collider.bounds.min; } }
 
-	public Vector2 Max { get { return Collider.bounds.max; } }
+	public Vector3 Max { get { return Collider.bounds.max; } }
 
-	public Vector2 Size { get { return Max - Min; } }
+	public Vector3 Size { get { return Max - Min; } }
 
 	public int width;
 
@@ -28,7 +28,7 @@ public class NavigationMesh : MonoBehaviour
 
 	public BoxCollider2D Collider { get { return GetComponent<BoxCollider2D>(); } }
 
-	public List<Vector2> FindPath(Vector2 start, Vector2 end)
+	public List<Vector3> FindPath(Vector3 start, Vector3 end)
 	{
 		return null;
 	}
@@ -51,7 +51,7 @@ public class NavigationMesh : MonoBehaviour
 		}
 	}
 
-	public Vertex this[Vector2 vector]
+	public Vertex this[Vector3 vector]
 	{
 		get
 		{
@@ -73,12 +73,12 @@ public class NavigationMesh : MonoBehaviour
 		return i >= 0 && i < vertices.Length;
 	}
 
-	private Vector2 ToWorld(Vector2Int location)
+	private Vector3 ToWorld(Vector2Int location)
 	{
-		return new Vector2(location.x, location.y) * vertexDistance + Min;
+		return new Vector3(location.x, location.y) * vertexDistance + Min;
 	}
 
-	public bool CanPath(Vector2 start, Vector2 end)
+	public bool CanPath(Vector3 start, Vector3 end)
 	{
 		var dir = end - start;
 		return Physics2D.Raycast(start, dir, dir.magnitude, terrainLayer).collider == null;
