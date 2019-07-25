@@ -109,6 +109,7 @@
     <Compile Include="Assets\Scripts\Path Finding\AStar.cs" />
     <Compile Include="Assets\Scripts\Path Finding\IPathAgent.cs" />
     <Compile Include="Assets\Scripts\Path Finding\NavigationMesh.cs" />
+    <Compile Include="Assets\Scripts\Path Finding\PathRequest.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Point.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Vertex.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />

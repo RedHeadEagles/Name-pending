@@ -132142,6 +132142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
+  maxPathThreads: 4
 --- !u!1 &1842969537
 GameObject:
   m_ObjectHideFlags: 0

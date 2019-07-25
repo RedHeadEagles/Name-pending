@@ -1,26 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 
 public class AStar : MonoSingleton<AStar>
 {
+	[Range(1, 32)]
+	public int maxPathThreads = 4;
+
+	public static int MaxPathThreads { get { return Instance.maxPathThreads; } }
+
 	public static NavigationMesh Mesh { get; private set; }
 
-	public Queue<Thread> pathRequests = new Queue<Thread>();
+	public Queue<PathRequest> pathRequests = new Queue<PathRequest>();
 
-	private void Update()
-	{
-		if (pathRequests.Count > 0)
-		{
-			var path = pathRequests.Dequeue();
-			path.Start();
-		}
-	}
+	public static int pathThreads = 0;
 
 	protected override void OnFirstRun()
 	{
 		Mesh = GetComponent<NavigationMesh>();
+		maxPathThreads = Mathf.Clamp(System.Environment.ProcessorCount / 4, 1, System.Environment.ProcessorCount);
 	}
 
 	private static List<Vector3> ReducePath(List<Vector3> path)
@@ -73,15 +72,34 @@ public class AStar : MonoSingleton<AStar>
 
 		if (hit.collider == null)
 		{
-			agent.OnPathFound(new List<Vector3>() { endLocation });
+			agent.OnPathFound(new List<Vector3>() { endLocation }, float.Epsilon);
 			return;
 		}
 
 		var start = Mesh[agent.transform.position];
 		var end = Mesh[endLocation];
 
-		var thread = new Thread(new ThreadStart(() => PathThread(agent, start, end)));
-		Instance.pathRequests.Enqueue(thread);
+		if (start == null || start.disabled || end == null || end.disabled)
+		{
+			agent.OnPathFailed(5);
+			return;
+		}
+
+		var request = new PathRequest()
+		{
+			agent = agent,
+			start = start,
+			end = end
+		};
+
+		Instance.pathRequests.Enqueue(request);
+
+		if(pathThreads< MaxPathThreads)
+		{
+			pathThreads++;
+			Task task = new Task(PathThread);
+			task.Start();
+		}
 	}
 
 	public static List<Vector3> FindPath(Vector3 startLocation, Vector3 endLocation)
@@ -94,6 +112,9 @@ public class AStar : MonoSingleton<AStar>
 
 		var start = Mesh[startLocation];
 		var end = Mesh[endLocation];
+
+		if (start == null || start.disabled || end == null || end.disabled)
+			return new List<Vector3>();
 
 		return FindPath(start, end);
 	}
@@ -139,13 +160,22 @@ public class AStar : MonoSingleton<AStar>
 		return new List<Vector3>();
 	}
 
-	private static void PathThread(IPathAgent agent, Vertex start, Vertex end)
+	private static void PathThread()
 	{
-		var path = FindPath(start, end);
+		while(Instance.pathRequests.Count>0)
+		{
+			var request = Instance.pathRequests.Dequeue();
 
-		if (path.Count == 0)
-			agent.OnPathFailed();
-		else
-			agent.OnPathFound(path);
+			var path = FindPath(request.start, request.end);
+
+			var time = (float)(System.DateTime.Now - request.time).TotalSeconds;
+
+			if (path.Count == 0)
+				request.agent.OnPathFailed(time);
+			else
+				request.agent.OnPathFound(path, time);
+		}
+
+		pathThreads--;
 	}
 }

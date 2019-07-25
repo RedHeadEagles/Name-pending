@@ -59,6 +59,9 @@ public class Bug : Entity
 		if (DistanceTo(home) > 30)
 			state = State.Return;
 
+		MoveTo(GameManager.Player.transform.position);
+		return;
+
 		switch (state)
 		{
 			case State.Chase:

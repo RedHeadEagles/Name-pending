@@ -5,7 +5,7 @@ public interface IPathAgent
 {
 	Transform transform { get; }
 
-	void OnPathFound(List<Vector3> path);
+	void OnPathFound(List<Vector3> path, float pathTime);
 
-	void OnPathFailed();
+	void OnPathFailed(float pathTime);
 }

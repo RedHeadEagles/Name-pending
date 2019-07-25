@@ -17,7 +17,7 @@ public class NavigationMesh : MonoBehaviour
 
 	public int height;
 
-	[Range(float.Epsilon, 20f)]
+	[Range(float.Epsilon, 20)]
 	[Tooltip("Smaller values improves map accuracy but will increase CPU load")]
 	public float vertexDistance = 2;
 

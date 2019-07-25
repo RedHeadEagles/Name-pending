@@ -42,14 +42,10 @@ public class Entity : MonoBehaviour, IPathAgent
 
 	public bool PathFinding { get; private set; }
 
-	[Range(float.Epsilon, 10f)]
-	public float waypointDistance = 0.25f;
-
 	private float nextPathFind = 0;
 
-	private System.DateTime lastPathStart;
-
-	private float lastPathTime;
+	[Range(float.Epsilon, 10f)]
+	public float waypointDistance = 0.25f;
 
 	/// <summary>
 	/// Gets called whenever this script either gets added to a GameObject or Reset in the editor
@@ -123,10 +119,8 @@ public class Entity : MonoBehaviour, IPathAgent
 	/// <param name="location"></param>
 	public void MoveTo(Vector2 location, float speedMod = 1)
 	{
-		if (!PathFinding && nextPathFind <= 0 || nextPathFind < -10 || path.Count == 0 && !PathFinding)
+		if (!PathFinding && nextPathFind <= 0 || !PathFinding && path.Count == 0)
 		{
-			lastPathStart = System.DateTime.Now;
-			nextPathFind = lastPathTime * 100;
 			PathFinding = true;
 			AStar.FindPath(this, location);
 		}
@@ -153,19 +147,22 @@ public class Entity : MonoBehaviour, IPathAgent
 
 	public void ApplyDamage(float amount)
 	{
-		Debug.Log(string.Format("{0} took {1} damage!", name, amount));
 		stats.health.Current -= amount;
 	}
 
-	public void OnPathFound(List<Vector3> path)
+	public void OnPathFound(List<Vector3> path, float pathTime)
 	{
-		lastPathTime = (float)(System.DateTime.Now - lastPathStart).TotalSeconds;
+		nextPathFind = pathTime;
 		this.path = path;
 
 		PathFinding = false;
 	}
 
-	public virtual void OnPathFailed() { }
+	public virtual void OnPathFailed(float pathTime)
+	{
+		nextPathFind = pathTime;
+		PathFinding = false;
+	}
 
 	protected virtual void OnDrawGizmosSelected()
 	{
