@@ -71,7 +71,6 @@
     <Compile Include="Assets\Game Data\Items\Equipment\EquipmentData.cs" />
     <Compile Include="Assets\Game Data\Items\Equipment\Special\SpecialData.cs" />
     <Compile Include="Assets\Game Data\Items\Equipment\Trinkets\TrinketData.cs" />
-    <Compile Include="Assets\Game Data\Items\Equipment\Weapons\Weapon.cs" />
     <Compile Include="Assets\Game Data\Items\ItemData.cs" />
     <Compile Include="Assets\Game Data\LootTable.cs" />
     <Compile Include="Assets\Game Data\NPC.cs" />
@@ -118,6 +117,7 @@
     <Compile Include="Assets\Scripts\Triggers\TriggerTargets.cs" />
     <Compile Include="Assets\Scripts\Triggers\ZoneLeaveTrigger.cs" />
     <Compile Include="Assets\Scripts\Vision.cs" />
+    <Compile Include="Assets\Scripts\Weapons\Weapon.cs" />
     <Compile Include="Assets\Scripts\Zone.cs" />
     <Compile Include="Assets\test.cs" />
     <Reference Include="Unity.Timeline.Editor">
