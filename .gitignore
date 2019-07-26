@@ -12,3 +12,6 @@ obj/
 *.user
 *.unityproj
 *.booproj
+Builds
+Logs
+Sketches

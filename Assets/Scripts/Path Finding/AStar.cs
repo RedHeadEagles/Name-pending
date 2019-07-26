@@ -1,58 +1,181 @@
-﻿using System.Collections;
+﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
+using System.Threading.Tasks;
 
-public static class AStar
+public class AStar : MonoSingleton<AStar>
 {
-	private static float EstiamteCost(Vertex start, Vertex end)
+	[Range(1, 32)]
+	public int maxPathThreads = 4;
+
+	public static int MaxPathThreads { get { return Instance.maxPathThreads; } }
+
+	public static NavigationMesh Mesh { get; private set; }
+
+	public Queue<PathRequest> pathRequests = new Queue<PathRequest>();
+
+	public static int pathThreads = 0;
+
+	protected override void OnFirstRun()
 	{
-		return Vector2Int.Distance(start.location, end.location);
+		Mesh = GetComponent<NavigationMesh>();
+		maxPathThreads = Mathf.Clamp(System.Environment.ProcessorCount / 4, 1, System.Environment.ProcessorCount);
 	}
 
-	private static List<Vector2> BuildPath(Mesh2D mesh, Dictionary<Vertex, Vertex> cameFrom, Vertex start, Vertex end)
+	private static List<Vector3> ReducePath(List<Vector3> path)
 	{
-		var path = new List<Vector2>();
-
-		while (end != start)
+		for (int i = 1; i < path.Count - 1; i++)
 		{
-			path.Insert(0, mesh.ToWorldGrid(end.location));
-			end = cameFrom[end];
+			var a = path[i - 1];
+			var b = path[i];
+
+			if (a.x == b.x || a.y == b.y)
+			{
+				path.RemoveAt(i - 1);
+				i--;
+			}
 		}
 
 		return path;
 	}
 
-	public static List<Vector2> FindPath(Mesh2D mesh, Vector2 startLocation, Vector2 endLocation)
+	private static List<Vector3> BuildPath(Dictionary<Point, Vertex> cameFrom, Vertex end)
 	{
-		var start = mesh.GetClosestVertex(startLocation);
-		var end = mesh.GetClosestVertex(endLocation);
+		var path = new List<Vector3>();
 
-		if (start == null || end == null)
-			return null;
+		while (end != null)
+		{
+			path.Insert(0, end.worldLocation);
+			end = cameFrom[end.location];
+		}
 
-		var open = new List<Vertex> { start };
-		var closed = new List<Vertex>();
-		var cameFrom = new Dictionary<Vertex, Vertex>();
-		var gScore = new Dictionary<Vertex, float>();
-		var fScore = new Dictionary<Vertex, float>();
+		return path;
+	}
 
-		gScore[start] = 0;
-		fScore[start] = EstiamteCost(start, end);
+	private static float Estimate(Point a, Point b)
+	{
+		return Mathf.Abs(b.x - a.x) + Mathf.Abs(b.y - a.y);
+	}
+
+	private static float Score(Dictionary<Point, float> scores, Point key)
+	{
+		if (scores.TryGetValue(key, out float score))
+			return score;
+
+		return float.MaxValue;
+	}
+
+	public static void FindPath(IPathAgent agent, Vector3 endLocation)
+	{
+		var dir = endLocation - agent.transform.position;
+		var hit = Physics2D.Raycast(agent.transform.position, dir, dir.magnitude, Mesh.terrainLayer);
+
+		if (hit.collider == null)
+		{
+			agent.OnPathFound(new List<Vector3>() { endLocation }, float.Epsilon);
+			return;
+		}
+
+		var start = Mesh[agent.transform.position];
+		var end = Mesh[endLocation];
+
+		if (start == null || start.disabled || end == null || end.disabled)
+		{
+			agent.OnPathFailed(5);
+			return;
+		}
+
+		var request = new PathRequest()
+		{
+			agent = agent,
+			start = start,
+			end = end
+		};
+
+		Instance.pathRequests.Enqueue(request);
+
+		if(pathThreads< MaxPathThreads)
+		{
+			pathThreads++;
+			Task task = new Task(PathThread);
+			task.Start();
+		}
+	}
+
+	public static List<Vector3> FindPath(Vector3 startLocation, Vector3 endLocation)
+	{
+		var dir = endLocation - startLocation;
+		var hit = Physics2D.Raycast(startLocation, dir, dir.magnitude, Mesh.terrainLayer);
+
+		if (hit.collider == null)
+			return new List<Vector3>() { endLocation };
+
+		var start = Mesh[startLocation];
+		var end = Mesh[endLocation];
+
+		if (start == null || start.disabled || end == null || end.disabled)
+			return new List<Vector3>();
+
+		return FindPath(start, end);
+	}
+
+	private static List<Vector3> FindPath(Vertex start, Vertex end)
+	{
+		var open = new List<Point>() { start.location };
+		var cameFrom = new Dictionary<Point, Vertex>();
+		var gScore = new Dictionary<Point, float>();
+		var fScore = new Dictionary<Point, float>();
+
+		cameFrom[start.location] = null;
+		gScore[start.location] = 0;
+		fScore[end.location] = 0;
 
 		while (open.Count > 0)
 		{
-			Vertex current = open[0];
+			open = open.OrderBy(f => Score(fScore, f)).ToList();
+			var current = open[0];
 			open.RemoveAt(0);
 
-			if (current == end)
-				return BuildPath(mesh, cameFrom, start, end);
+			var currentV = Mesh[current.x, current.y];
 
-			foreach (var neighbor in current.connections)
+			if (current == end.location)
+				return BuildPath(cameFrom, currentV);
+
+			foreach (var neighbor in currentV)
 			{
-				//var score = gScore[current] + EstiamteCost(current, neighbor);
+				var score = Score(gScore, current) + Estimate(current, neighbor);
+
+				if (score < Score(gScore, neighbor))
+				{
+					cameFrom[neighbor] = currentV;
+					gScore[neighbor] = score;
+					fScore[neighbor] = Score(gScore, neighbor) + 1;
+
+					if (!open.Contains(neighbor))
+						open.Insert(0, neighbor);
+				}
 			}
 		}
 
-		return null;
+		return new List<Vector3>();
+	}
+
+	private static void PathThread()
+	{
+		while(Instance.pathRequests.Count>0)
+		{
+			var request = Instance.pathRequests.Dequeue();
+
+			var path = FindPath(request.start, request.end);
+
+			var time = (float)(System.DateTime.Now - request.time).TotalSeconds;
+
+			if (path.Count == 0)
+				request.agent.OnPathFailed(time);
+			else
+				request.agent.OnPathFound(path, time);
+		}
+
+		pathThreads--;
 	}
 }

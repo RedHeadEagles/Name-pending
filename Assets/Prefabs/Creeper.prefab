@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2005886278481055512
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6805168623498772649}
+  - component: {fileID: 9032436883105296720}
+  m_Layer: 13
+  m_Name: Aggro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6805168623498772649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005886278481055512}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3181941892310650731}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &9032436883105296720
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005886278481055512}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 10
 --- !u!1 &3181941892310650729
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,7 +77,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 18, y: 10.7, z: -4.8145747}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6805168623498772649}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -97,14 +145,14 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 10
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &3181941892310650644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,10 +165,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ccbd9b4abae1d4a9a7ad9743483260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health:
-    max: 100
-    current: 100
-    regen: 1
+  inventory: {fileID: 0}
+  ai: {fileID: 0}
+  rigidBody: {fileID: 3181941892310650645}
+  stats:
+    health:
+      levelMultiplier: 0.05
+      baseValue: 100
+      invulnerable: 0
+    stamina:
+      levelMultiplier: 0.05
+      baseValue: 100
+      regenPercentage: 0.01
+    speed:
+      levelMultiplier: 0.05
+      baseValue: 90
+      walkModifier: 0.25
+      dashModifier: 10
+      dashEnergyCost: 20
+    defense:
+      levelMultiplier: 0.05
+      baseValue: 1
+    attack:
+      levelMultiplier: 0.05
+      baseValue: 1
+  waypointDistance: 0.25
   wanderRange: 5
   speedChase: 10
   speedWander: 3

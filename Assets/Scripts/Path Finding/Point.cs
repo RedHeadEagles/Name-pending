@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 [System.Serializable]
 public struct Point
@@ -9,30 +8,22 @@ public struct Point
 
 	public int y;
 
-	public Point(int X, int Y)
+	public static implicit operator Point(Vector2Int vector)
 	{
-		x = X;
-		y = Y;
+		return new Point()
+		{
+			x = vector.x,
+			y = vector.y
+		};
 	}
 
-	public float Distance(Point a, Point b)
+	public static bool operator ==(Point a, Point b)
 	{
-
-		return Mathf.Sqrt(Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y));
+		return a.x == b.x && a.y == b.y;
 	}
 
-	public static Point operator +(Point a, Point b)
+	public static bool operator !=(Point a, Point b)
 	{
-		return new Point(a.x + b.x, a.y + b.y);
-	}
-
-	public static Point operator -(Point a, Point b)
-	{
-		return new Point(a.x - b.x, a.y - b.y);
-	}
-
-	public static Point operator *(Point a, int mod)
-	{
-		return new Point(a.x * mod, a.y * mod);
+		return a.x != b.x || a.y != b.y;
 	}
 }
