@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 3181941892310650730}
   - component: {fileID: 3181941892310650645}
   - component: {fileID: 3181941892310650644}
-  - component: {fileID: 3181941892310650646}
+  - component: {fileID: -2211017926916299131}
   m_Layer: 8
   m_Name: Creeper
   m_TagString: Untagged
@@ -199,7 +199,7 @@ MonoBehaviour:
   attackRange: 1
   attackTime: 2
   attackDamage: 20
---- !u!58 &3181941892310650646
+--- !u!58 &-2211017926916299131
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,4 +214,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.01
+  m_Radius: 0.0001

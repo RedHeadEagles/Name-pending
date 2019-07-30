@@ -113,6 +113,7 @@
     <Compile Include="Assets\Scripts\Path Finding\Point.cs" />
     <Compile Include="Assets\Scripts\Path Finding\Vertex.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
+    <Compile Include="Assets\Scripts\TargetCursor.cs" />
     <Compile Include="Assets\Scripts\Terrain.cs" />
     <Compile Include="Assets\Scripts\Triggers\Trigger.cs" />
     <Compile Include="Assets\Scripts\Triggers\TriggerTargets.cs" />
