@@ -8,7 +8,7 @@ public class EntityResource : Stat
 	/// </summary>
 	public float Max { get { return Value; } }
 	
-	private float current;
+	protected float current;
 
 	/// <summary>
 	/// The current amount of this resource

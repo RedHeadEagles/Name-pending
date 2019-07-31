@@ -6,6 +6,7 @@ public class Health : EntityResource
 	/// <summary>
 	/// Is this entity immune to all forms of damage
 	/// </summary>
+	[Tooltip("Is this entity immune to all forms of damage")]
 	public bool invulnerable = false;
 
 	public Health(float levelModifier) : base(levelModifier)
@@ -13,16 +14,42 @@ public class Health : EntityResource
 		BaseValue = 100;
 	}
 
-	public void Damage(float amount)
+	/// <summary>
+	/// Deals damage to this entity, returns amount of overkill
+	/// </summary>
+	/// <param name="amount">Amount of damage to deal</param>
+	/// <returns>Resturns how much damage was overkill</returns>
+	public float Damage(float amount)
 	{
 		if (invulnerable)
-			return;
+			return 0;
 
-		Current -= amount;
+		current -= amount;
+
+		if(current<0)
+		{
+			amount = -current;
+			current = 0;
+		}
+
+		return amount;
 	}
 
-	public void Heal(float amount)
+	/// <summary>
+	/// Heals this entity the given amount, returns amount of overhealing
+	/// </summary>
+	/// <param name="amount">Number of hit points to heal</param>
+	/// <returns>Returns number of hit points over healed</returns>
+	public float Heal(float amount)
 	{
-		Current += amount;
+		current += amount;
+
+		if(current>Max)
+		{
+			amount = Max - current;
+			current = Max;
+		}
+
+		return amount;
 	}
 }
