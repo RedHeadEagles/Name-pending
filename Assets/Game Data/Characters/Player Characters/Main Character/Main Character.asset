@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fccc5fb660c47ba479b0965ab5e6a851, type: 3}
-  m_Name: Bite
+  m_Script: {fileID: 11500000, guid: 324ca92694f21134fa09e0651402663d, type: 3}
+  m_Name: Main Character
   m_EditorClassIdentifier: 
-  name: Bite
-  baseDamage: 10
-  range: 1
-  staminaCost: 20
-  statusEffects: []
+  health: 100
+  mana: 100
+  initiative: 10
+  worldSprites: {fileID: 0}
+  battleSprits: {fileID: 0}

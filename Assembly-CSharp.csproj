@@ -60,8 +60,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Game Data\Attacks\Attack.cs" />
-    <Compile Include="Assets\Game Data\Characters\CharacterData.cs" />
+    <Compile Include="Assets\Game Data\Attack.cs" />
+    <Compile Include="Assets\Game Data\Characters\Character.cs" />
+    <Compile Include="Assets\Game Data\Characters\NPCs\NPC.cs" />
+    <Compile Include="Assets\Game Data\Characters\Player Characters\PlayerCharacter.cs" />
     <Compile Include="Assets\Game Data\Containers\ContainerData.cs" />
     <Compile Include="Assets\Game Data\Effects\Buffs\BuffData.cs" />
     <Compile Include="Assets\Game Data\Effects\Debuffs\DebuffData.cs" />
@@ -73,8 +75,8 @@
     <Compile Include="Assets\Game Data\Items\Equipment\Trinkets\TrinketData.cs" />
     <Compile Include="Assets\Game Data\Items\ItemData.cs" />
     <Compile Include="Assets\Game Data\LootTable.cs" />
-    <Compile Include="Assets\Game Data\NPC.cs" />
-    <Compile Include="Assets\Game Data\PlayerData.cs" />
+    <Compile Include="Assets\Game Data\SpriteAnimation.cs" />
+    <Compile Include="Assets\Game Data\SpriteSheet.cs" />
     <Compile Include="Assets\Game Data\StatsData.cs" />
     <Compile Include="Assets\Scripts\AI\AI.cs" />
     <Compile Include="Assets\Scripts\Enemies\Bug.cs" />
